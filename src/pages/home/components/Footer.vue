@@ -48,9 +48,3 @@ import { Instagram, Linkedin } from "lucide-vue-next"
     </div>
   </footer>
 </template>
-
-<style scoped>
-footer {
-  font-family: "Inter", sans-serif;
-}
-</style>

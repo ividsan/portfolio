@@ -2,7 +2,7 @@ import About from "@/pages/about.vue"
 import Contact from "@/pages/contacto.vue"
 import Home from "@/pages/home/Home.vue"
 import ProjectDetail from "@/pages/projects/ProjectDetail.vue"
-import Projects from "@/pages/projects.vue"
+import Projects from "@/pages/projects/projects.vue"
 import { createRouter, createWebHashHistory } from "vue-router"
 
 export const router = createRouter({
@@ -22,14 +22,12 @@ export const router = createRouter({
       path: "/projects",
       name: "projects",
       component: Projects,
-      children: [
-        {
-          path: ":slug",
-          name: "project-detail",
-          component: ProjectDetail,
-          props: true,
-        },
-      ],
+    },
+    {
+      path: "/projects/:slug",
+      name: "project-detail",
+      component: ProjectDetail,
+      props: true,
     },
     {
       path: "/contact",
