@@ -1,51 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import Footer from "../home/components/Footer.vue"
-
-interface ProjectItem {
-  slug: string
-  title: string
-  description: string
-}
-
-const projects: ProjectItem[] = [
-  {
-    slug: "lqnm-1",
-    title: "LQNM",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    slug: "lqnm-2",
-    title: "LQNM",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    slug: "lqnm-3",
-    title: "LQNM",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    slug: "lqnm-4",
-    title: "LQNM",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    slug: "lqnm-5",
-    title: "LQNM",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    slug: "lqnm-6",
-    title: "LQNM",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-]
+import { projects, type ProjectItem } from "./data"
 
 const projectRows = computed(() => {
   const rows: ProjectItem[][] = []
@@ -78,7 +34,7 @@ const projectRows = computed(() => {
               :to="`/projects/${project.slug}`"
               class="group relative block aspect-square overflow-hidden border border-transparent transition hover:border-violet-500"
             >
-              <img src="/imagenes/prueba.jpg" :alt="project.title" class="h-full w-full object-cover">
+              <img :src="project.image" :alt="project.title" class="h-full w-full object-cover">
               <div class="absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/15">
                 <span class="text-[50px] leading-none opacity-0 transition group-hover:opacity-100 hover:underline">
                   Saber mas
