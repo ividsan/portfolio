@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView, useRoute } from "vue-router"
+import Footer from "./pages/home/components/Footer.vue"
 
 const route = useRoute()
 
@@ -17,26 +18,29 @@ const isActive = (path: string) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#ffffff] text-black">
-    <header class="w-ful  px-5 pt-3 pb-2 md:px-9">
-      <nav class="grid grid-cols-2 gap-y-4 md:grid-cols-4 md:items-center">
-        <RouterLink
-          v-for="item in navItems"
-          :key="item.to"
-          :to="item.to"
-          class="w-fit text-[22px] leading-none font-normal tracking-tight transition-opacity hover:opacity-70 md:text-[32px]"
-          :class="{ 'underline underline-offset-[14px]': isActive(item.to) }"
-        >
-          {{ item.label }}
-        </RouterLink>
+  <div class="flex min-h-screen flex-col bg-white text-black">
+    <header class="bg-white px-10 pt-8">
+      <nav class="grid grid-cols-5 items-center">
+        <p class="text-[20px] leading-none font-normal uppercase">ENNE</p>
+          <RouterLink
+            v-for="item in navItems"
+            :key="item.to"
+            :to="item.to"
+            class="w-fit justify-self-center text-[20px] leading-none font-normal uppercase transition-colors hover:text-[#002FA7]"
+            :class="{ 'text-[#002FA7] font-bold': isActive(item.to) }"
+          >
+            [ {{ item.label.toUpperCase() }} ]
+          </RouterLink>
       </nav>
     </header>
 
-    <RouterView />
+    <main class="flex-1 bg-white">
+      <RouterView />
+    </main>
+    <Footer />
   </div>
 </template>
 
 
 <style scoped>
-
 </style>

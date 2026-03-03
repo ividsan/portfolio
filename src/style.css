@@ -174,11 +174,14 @@
   body {
     @apply bg-background text-foreground;
     font-family: "FFF Acid Grotesk", system-ui, sans-serif;
+    font-weight: 400;
   }
   button,
   input,
   textarea,
-  select {
+  select,
+  a {
     font-family: "FFF Acid Grotesk", system-ui, sans-serif;
+    font-weight: 400;
   }
 }

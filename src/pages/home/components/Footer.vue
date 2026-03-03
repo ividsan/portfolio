@@ -1,49 +1,41 @@
-<script setup lang="ts">
-import { Instagram, Linkedin } from "lucide-vue-next"
-</script>
-
 <template>
-  <footer class="border-t border-zinc-300 bg-white px-5 py-8 text-black md:px-9">
-    <div class="mx-auto max-w-7xl">
-      <div class="mb-6">
-        <h2 class="text-xl font-light tracking-tight italic md:text-2xl">
-          Don't be a stranger, say hi!
-        </h2>
+  <footer class="bg-white px-10 pb-6 text-black">
+    <div class="grid grid-cols-2 items-end">
+      <div>
+        <p class="text-[14.67px] leading-none font-normal uppercase">DON'T BE A STRANGER, SAY HI!</p>
+        <a
+          href="mailto:irenevidalsanchis@gmail.com"
+          class="mt-4 inline-block text-[16px] leading-none font-normal transition-colors hover:text-[#002FA7]"
+        >
+          irenevidalsanchis@gmail.com
+        </a>
       </div>
 
-      <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-        <div class="space-y-2">
-          <p class="text-[10px] font-medium uppercase tracking-widest text-zinc-600">Get in touch</p>
-          <a
-            href="mailto:irenevidalsanchis@gmail.com"
-            class="text-lg transition-colors duration-300 hover:text-zinc-600 md:text-xl"
-          >
-            irenevidalsanchis@gmail.com
-          </a>
-        </div>
-
-        <div class="flex items-center gap-4">
-          <a
-            href="https://instagram.com/ireneevidal"
-            target="_blank"
-            class="transition-colors hover:text-zinc-600"
-            aria-label="Instagram"
-          >
-            <Instagram :size="20" stroke-width="1.5" />
-          </a>
-          <a
-            href="https://linkedin.com/in/irenevidal"
-            target="_blank"
-            class="transition-colors hover:text-zinc-600"
-            aria-label="LinkedIn"
-          >
-            <Linkedin :size="20" stroke-width="1.5" />
-          </a>
-        </div>
-      </div>
-
-      <div class="mt-8 flex items-center justify-between border-t border-zinc-300 pt-5 text-[9px] uppercase tracking-[0.2em] text-zinc-600">
-        <p>2026 - Irene Vidal. Todos los derechos reservados.</p>
+      <div class="flex items-center justify-end gap-10">
+        <a
+          href="https://www.behance.net/"
+          target="_blank"
+          rel="noreferrer"
+          class="text-[13.33px] leading-none font-normal uppercase transition-colors hover:text-[#002FA7]"
+        >
+          [ BEHANCE ]
+        </a>
+        <a
+          href="https://linkedin.com/in/irenevidal"
+          target="_blank"
+          rel="noreferrer"
+          class="text-[13.33px] leading-none font-normal uppercase transition-colors hover:text-[#002FA7]"
+        >
+          [ LINKEDIN ]
+        </a>
+        <a
+          href="https://instagram.com/ireneevidal"
+          target="_blank"
+          rel="noreferrer"
+          class="text-[13.33px] leading-none font-normal uppercase transition-colors hover:text-[#002FA7]"
+        >
+          [ INSTAGRAM ]
+        </a>
       </div>
     </div>
   </footer>
