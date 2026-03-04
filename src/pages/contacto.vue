@@ -35,20 +35,20 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
 </script>
 
 <template>
-  <main class="px-10 pt-10 pb-6">
-    <section class="mx-auto w-full max-w-[720px]">
-      <h1 class="mb-4 text-center text-[20px] leading-none font-medium uppercase">GOT A PROJECT? LET'S TALK</h1>
+  <main class="px-4 pt-4 pb-1 sm:px-10 sm:pt-10 sm:pb-24 lg:pb-40">
+    <section class="mx-auto mt-[52px] w-full max-w-[720px] sm:mt-[85px] lg:origin-top lg:scale-[1.2]">
+      <h1 class="mb-2 text-center text-[18px] leading-none font-medium uppercase sm:mb-4 sm:text-[20px]">GOT A PROJECT? LET'S TALK</h1>
 
       <form class="relative border border-black text-[14px] leading-none" @submit.prevent="handleSubmit">
-        <div class="grid grid-cols-2 border-b border-black">
-          <div class="group border-r border-black px-2 pt-2 pb-1">
+        <div class="grid grid-cols-1 border-b border-black sm:grid-cols-2">
+          <div class="group border-b border-black px-2 pt-2 pb-1 sm:border-r sm:border-b-0">
             <label for="name" class="font-medium uppercase transition-colors group-hover:text-[#002FA7] group-focus-within:text-[#002FA7]">NAME</label>
             <input
               id="name"
               v-model.trim="form.name"
               type="text"
               required
-              class="mt-1 h-8 w-full border-0 bg-transparent text-[14px] leading-none focus:outline-none"
+              class="mt-1 h-7 w-full border-0 bg-transparent text-[14px] leading-none sm:h-8 focus:outline-none"
             >
           </div>
           <div class="group px-2 pt-2 pb-1">
@@ -58,7 +58,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
               v-model.trim="form.surname"
               type="text"
               required
-              class="mt-1 h-8 w-full border-0 bg-transparent text-[14px] leading-none focus:outline-none"
+              class="mt-1 h-7 w-full border-0 bg-transparent text-[14px] leading-none sm:h-8 focus:outline-none"
             >
           </div>
         </div>
@@ -70,7 +70,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
             v-model.trim="form.email"
             type="email"
             required
-            class="mt-1 h-8 w-full border-0 bg-transparent text-[14px] leading-none focus:outline-none"
+            class="mt-1 h-7 w-full border-0 bg-transparent text-[14px] leading-none sm:h-8 focus:outline-none"
           >
         </div>
 
@@ -80,7 +80,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
             id="projectIdea"
             v-model.trim="form.projectIdea"
             required
-            class="mt-2 h-[120px] w-full resize-none border-0 bg-transparent text-[14px] leading-none focus:outline-none"
+            class="mt-1 h-[76px] w-full resize-none border-0 bg-transparent text-[14px] leading-none sm:mt-2 sm:h-[120px] focus:outline-none"
           />
         </div>
 
@@ -89,11 +89,11 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
           <img src="/imagenes/clip 2.png" alt="" class="clip-photo__clip clip-photo__clip--hover">
         </div>
 
-        <div class="relative min-h-[162px] px-2 pt-2 pb-4">
-          <div class="group pr-[190px]">
+        <div class="relative min-h-[138px] px-2 pt-1 pb-2 sm:min-h-[162px] sm:pt-2 sm:pb-4">
+          <div class="group pr-0 md:pr-[190px]">
             <p class="font-medium uppercase transition-colors group-hover:text-[#002FA7] group-focus-within:text-[#002FA7]">SERVICES OF INTEREST</p>
 
-            <div class="mt-3 text-[14px] leading-[20px] uppercase">
+            <div class="mt-2 text-[14px] leading-[17px] uppercase sm:mt-3 sm:leading-[20px]">
             <button
               v-for="service in services"
               :key="service"
@@ -110,7 +110,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
                 id="other"
                 v-model="form.other"
                 type="text"
-                class="w-[230px] border-b border-black bg-transparent text-[14px] leading-none focus:outline-none"
+                class="w-[180px] border-b border-black bg-transparent text-[14px] leading-none sm:w-[230px] focus:outline-none"
               >
             </label>
           </div>
@@ -122,7 +122,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
 
           <button
             type="submit"
-            class="absolute right-0 bottom-0 flex h-[52px] w-[180px] cursor-pointer items-start justify-start border-l border-t border-black p-2 text-left text-[14px] leading-none font-medium uppercase transition-colors hover:text-[#002FA7] focus:text-[#002FA7]"
+            class="absolute right-0 bottom-0 flex h-[44px] w-[180px] cursor-pointer items-start justify-start border-l border-t border-black p-1.5 text-left text-[14px] leading-none font-medium uppercase transition-colors sm:h-[52px] sm:p-2 hover:text-[#002FA7] focus:text-[#002FA7]"
           >
             SEND
           </button>
@@ -154,7 +154,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
   position: absolute;
   top: 0;
   right: 0;
-  width: 264px;
+  width: 100%;
   transition: opacity 180ms ease;
   pointer-events: auto;
 }
@@ -182,22 +182,29 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
     font-size: 14px !important;
   }
 
-  .pr-\[190px\] {
-    padding-right: 0;
-  }
-
   .absolute.right-0.bottom-0 {
     position: static;
-    margin-top: 12px;
+    margin-top: 6px;
     width: 100%;
     border-left: 0;
   }
 
   .clip-photo {
-    position: static;
-    margin: 12px 0 0 auto;
-    right: auto;
-    top: auto;
+    position: absolute;
+    top: -44px;
+    right: -10px;
+    width: clamp(120px, 32vw, 170px);
+    height: clamp(120px, 32vw, 170px);
+    margin: 0;
+    transform: none;
   }
 }
 </style>
+
+
+
+
+
+
+
+
