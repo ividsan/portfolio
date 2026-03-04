@@ -19,14 +19,14 @@ const isActive = (path: string) => {
 
 <template>
   <div class="flex min-h-screen flex-col bg-white text-black">
-    <header class="bg-white px-10 pt-8">
-      <nav class="grid grid-cols-5 items-center">
-        <p class="text-[20px] leading-none font-normal uppercase">ENNE</p>
+    <header class="bg-white px-4 pt-5 md:px-10 md:pt-8">
+      <nav class="grid grid-cols-2 items-center gap-y-2 md:grid-cols-5">
+        <p class="col-span-2 text-[clamp(18px,5vw,20px)] leading-none font-normal uppercase md:col-span-1 md:text-[20px]">ENNE</p>
           <RouterLink
             v-for="item in navItems"
             :key="item.to"
             :to="item.to"
-            class="w-fit justify-self-center text-[20px] leading-none font-normal uppercase transition-colors hover:text-[#002FA7]"
+            class="w-fit justify-self-start text-[clamp(14px,4.2vw,20px)] leading-none font-normal uppercase transition-colors hover:text-[#002FA7] md:justify-self-center md:text-[20px]"
             :class="{ 'text-[#002FA7] font-bold': isActive(item.to) }"
           >
             [ {{ item.label.toUpperCase() }} ]

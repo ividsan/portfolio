@@ -39,7 +39,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
     <section class="mx-auto w-full max-w-[720px]">
       <h1 class="mb-4 text-center text-[20px] leading-none font-medium uppercase">GOT A PROJECT? LET'S TALK</h1>
 
-      <form class="border border-black text-[14px] leading-none" @submit.prevent="handleSubmit">
+      <form class="relative border border-black text-[14px] leading-none" @submit.prevent="handleSubmit">
         <div class="grid grid-cols-2 border-b border-black">
           <div class="group border-r border-black px-2 pt-2 pb-1">
             <label for="name" class="font-medium uppercase transition-colors group-hover:text-[#002FA7] group-focus-within:text-[#002FA7]">NAME</label>
@@ -82,6 +82,11 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
             required
             class="mt-2 h-[120px] w-full resize-none border-0 bg-transparent text-[14px] leading-none focus:outline-none"
           />
+        </div>
+
+        <div class="clip-photo" aria-hidden="true">
+          <img src="/imagenes/clip 1.png" alt="" class="clip-photo__clip clip-photo__clip--default">
+          <img src="/imagenes/clip 2.png" alt="" class="clip-photo__clip clip-photo__clip--hover">
         </div>
 
         <div class="relative min-h-[162px] px-2 pt-2 pb-4">
@@ -135,6 +140,37 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
 </template>
 
 <style scoped>
+.clip-photo {
+  position: absolute;
+  top: -58px;
+  right: -77px;
+  width: 250px;
+  height: 250px;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.clip-photo__clip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 264px;
+  transition: opacity 180ms ease;
+  pointer-events: auto;
+}
+
+.clip-photo__clip--hover {
+  opacity: 0;
+}
+
+.clip-photo:hover .clip-photo__clip--default {
+  opacity: 0;
+}
+
+.clip-photo:hover .clip-photo__clip--hover {
+  opacity: 1;
+}
+
 @media (max-width: 900px) {
   form {
     font-size: 14px !important;
@@ -155,6 +191,13 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
     margin-top: 12px;
     width: 100%;
     border-left: 0;
+  }
+
+  .clip-photo {
+    position: static;
+    margin: 12px 0 0 auto;
+    right: auto;
+    top: auto;
   }
 }
 </style>
