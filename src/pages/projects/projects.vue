@@ -27,6 +27,14 @@ const openEnvelope = () => {
           aria-hidden="true"
           class="envelope__piece envelope__piece--base"
         />
+        <div class="envelope__photos" aria-hidden="true">
+          <span class="envelope__photo envelope__photo--1" />
+          <span class="envelope__photo envelope__photo--2" />
+          <span class="envelope__photo envelope__photo--3" />
+          <span class="envelope__photo envelope__photo--4" />
+          <span class="envelope__photo envelope__photo--5" />
+          <span class="envelope__photo envelope__photo--6" />
+        </div>
         <img
           src="/imagenes/sobre/solapa izquierda.png"
           alt=""
@@ -292,7 +300,108 @@ const openEnvelope = () => {
 .envelope__piece--base {
   --offset-x: 0%;
   --offset-y: 6.8%;
+  z-index: 2;
+}
+
+.envelope__photos {
+  position: absolute;
+  inset: 0;
   z-index: 3;
+  pointer-events: none;
+}
+
+.envelope__photo {
+  position: absolute;
+  width: 24%;
+  aspect-ratio: 0.74 / 1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  transition:
+    left 820ms cubic-bezier(0.22, 1, 0.36, 1),
+    top 820ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: left, top, transform;
+}
+
+.envelope__photo--1 {
+  left: 30%;
+  top: 29%;
+  transform: rotate(-3deg);
+  background: #113ab7;
+}
+
+.envelope__photo--2 {
+  left: 18%;
+  top: 35.5%;
+  transform: rotate(-12deg);
+  background: #17937d;
+}
+
+.envelope__photo--3 {
+  left: 32%;
+  top: 37.5%;
+  transform: rotate(-6deg);
+  background: #9584ce;
+}
+
+.envelope__photo--4 {
+  left: 42%;
+  top: 28%;
+  transform: rotate(3deg);
+  background: #9d1063;
+}
+
+.envelope__photo--5 {
+  left: 46%;
+  top: 37%;
+  transform: rotate(7deg);
+  background: #06b962;
+}
+
+.envelope__photo--6 {
+  left: 57%;
+  top: 30%;
+  transform: rotate(8deg);
+  background: #5a31ab;
+}
+
+.envelope.is-open .envelope__photos {
+  z-index: 6;
+}
+
+.envelope.is-open .envelope__photo--1 {
+  left: -28%;
+  top: 58%;
+  transform: rotate(-3deg);
+}
+
+.envelope.is-open .envelope__photo--2 {
+  left: -33%;
+  top: -3%;
+  transform: rotate(-12deg);
+}
+
+.envelope.is-open .envelope__photo--3 {
+  left: 8%;
+  top: -8%;
+  transform: rotate(-6deg);
+}
+
+.envelope.is-open .envelope__photo--4 {
+  left: 88%;
+  top: 58%;
+  transform: rotate(3deg);
+}
+
+.envelope.is-open .envelope__photo--5 {
+  left: 56%;
+  top: -8%;
+  transform: rotate(7deg);
+}
+
+.envelope.is-open .envelope__photo--6 {
+  left: 91%;
+  top: -4%;
+  transform: rotate(8deg);
 }
 
 .envelope__piece--izquierda {
@@ -310,7 +419,7 @@ const openEnvelope = () => {
 .envelope__piece--inferior {
   --offset-x: 0.7%;
   --offset-y: -2.2%;
-  z-index: 2;
+  z-index: 4;
 }
 
 .envelope__piece--superior {
