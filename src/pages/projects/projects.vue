@@ -27,13 +27,37 @@ const openEnvelope = () => {
           aria-hidden="true"
           class="envelope__piece envelope__piece--base"
         />
-        <div class="envelope__photos" aria-hidden="true">
-          <span class="envelope__photo envelope__photo--1" />
-          <span class="envelope__photo envelope__photo--2" />
-          <span class="envelope__photo envelope__photo--3" />
-          <span class="envelope__photo envelope__photo--4" />
-          <span class="envelope__photo envelope__photo--5" />
-          <span class="envelope__photo envelope__photo--6" />
+        <div class="envelope__photos">
+          <RouterLink
+            :to="{ name: 'project-detail', params: { slug: project1.slug } }"
+            class="envelope__photo envelope__photo--1 envelope__photo-link"
+            :aria-label="`Open ${project1.code} ${project1.title}`"
+          />
+          <RouterLink
+            :to="{ name: 'project-detail', params: { slug: project2.slug } }"
+            class="envelope__photo envelope__photo--2 envelope__photo-link"
+            :aria-label="`Open ${project2.code} ${project2.title}`"
+          />
+          <RouterLink
+            :to="{ name: 'project-detail', params: { slug: project3.slug } }"
+            class="envelope__photo envelope__photo--3 envelope__photo-link"
+            :aria-label="`Open ${project3.code} ${project3.title}`"
+          />
+          <RouterLink
+            :to="{ name: 'project-detail', params: { slug: project4.slug } }"
+            class="envelope__photo envelope__photo--4 envelope__photo-link"
+            :aria-label="`Open ${project4.code} ${project4.title}`"
+          />
+          <RouterLink
+            :to="{ name: 'project-detail', params: { slug: project5.slug } }"
+            class="envelope__photo envelope__photo--5 envelope__photo-link"
+            :aria-label="`Open ${project5.code} ${project5.title}`"
+          />
+          <RouterLink
+            :to="{ name: 'project-detail', params: { slug: project6.slug } }"
+            class="envelope__photo envelope__photo--6 envelope__photo-link"
+            :aria-label="`Open ${project6.code} ${project6.title}`"
+          />
         </div>
         <img
           src="/imagenes/sobre/solapa izquierda.png"
@@ -275,7 +299,7 @@ const openEnvelope = () => {
 
 .envelope {
   position: relative;
-  width: min(96vw, 860px);
+  width: min(90vw, 780px);
   aspect-ratio: 1167 / 822;
   transform: translateY(-13%);
   perspective: 1200px;
@@ -307,12 +331,12 @@ const openEnvelope = () => {
   position: absolute;
   inset: 0;
   z-index: 3;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .envelope__photo {
   position: absolute;
-  width: 24%;
+  width: 21%;
   aspect-ratio: 0.74 / 1;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
   transition:
@@ -320,6 +344,31 @@ const openEnvelope = () => {
     top 820ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: left, top, transform;
+}
+
+.envelope__photo-link {
+  display: block;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.envelope__photo-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 0;
+  transition: opacity 160ms ease;
+  pointer-events: none;
+}
+
+.envelope.is-open .envelope__photo-link {
+  pointer-events: auto;
+}
+
+.envelope.is-open .envelope__photo-link:hover::after,
+.envelope.is-open .envelope__photo-link:focus-visible::after {
+  opacity: 1;
 }
 
 .envelope__photo--1 {
@@ -387,7 +436,7 @@ const openEnvelope = () => {
 }
 
 .envelope.is-open .envelope__photo--4 {
-  left: 88%;
+  left: 100%;
   top: 58%;
   transform: rotate(3deg);
 }
@@ -399,7 +448,7 @@ const openEnvelope = () => {
 }
 
 .envelope.is-open .envelope__photo--6 {
-  left: 91%;
+  left: 104%;
   top: -4%;
   transform: rotate(8deg);
 }
