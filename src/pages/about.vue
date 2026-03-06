@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, reactive, ref } from "vue"
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue"
 
 type ArrowDot = {
   x: number
@@ -23,6 +23,10 @@ const dots = reactive<ArrowDot[]>([
 ])
 
 const arrowRef = ref<HTMLElement | null>(null)
+const magazineImages = ["/imagenes/revista-1.jpg", "/imagenes/revista-2.jpg"] as const
+const currentMagazineIndex = ref(0)
+const currentMagazineSrc = computed(() => magazineImages[currentMagazineIndex.value])
+
 const pointer = reactive({
   x: 0,
   y: 0,
@@ -84,6 +88,10 @@ const handlePointerLeave = () => {
   pointer.active = false
 }
 
+const showNextMagazine = () => {
+  currentMagazineIndex.value = (currentMagazineIndex.value + 1) % magazineImages.length
+}
+
 onMounted(() => {
   frame = requestAnimationFrame(tick)
 })
@@ -95,11 +103,22 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="about-page px-5 py-8 md:px-9">
+    <section class="about-magazine" aria-label="About portrait">
+      <div class="about-magazine__viewport">
+        <img
+          :src="currentMagazineSrc"
+          alt="Retrato en formato revista"
+          class="about-magazine__image"
+        >
+      </div>
+    </section>
+
     <button
       ref="arrowRef"
       type="button"
       class="about-arrow"
-      aria-label="Next"
+      aria-label="Next magazine"
+      @click="showNextMagazine"
       @pointermove="handlePointerMove"
       @pointerleave="handlePointerLeave"
     >
@@ -118,13 +137,38 @@ onBeforeUnmount(() => {
 <style scoped>
 .about-page {
   position: relative;
-  min-height: 70vh;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: clamp(84px, 9vh, 132px);
+}
+
+.about-magazine {
+  width: min(100%, 840px);
+  display: flex;
+  justify-content: center;
+  transform: translateY(-70px);
+}
+
+.about-magazine__viewport {
+  width: clamp(680px, 58vw, 880px);
+  max-width: 100%;
+  aspect-ratio: 1.25 / 1;
+  overflow: hidden;
+}
+
+.about-magazine__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .about-arrow {
   position: absolute;
   right: clamp(26px, 4vw, 50px);
-  bottom: clamp(30px, 5vh, 56px);
+  bottom: clamp(200px, 16vh, 260px);
   width: 170px;
   height: 130px;
   border: 0;
