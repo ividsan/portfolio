@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
+import { projects } from "./data"
 
 const isOpen = ref(false)
+const [project1, project2, project3, project4, project5, project6] = projects
 
 const openEnvelope = () => {
   isOpen.value = true
@@ -48,7 +50,81 @@ const openEnvelope = () => {
         </div>
       </section>
     </section>
-    <section class="projects-white-screen" aria-hidden="true" />
+    <section class="projects-gallery-screen" aria-label="Projects gallery">
+      <div class="projects-gallery-grid">
+        <article class="project-tile">
+          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project1.slug } }">
+            <p class="project-tile__title">{{ project1.code }} {{ project1.title }}</p>
+          </RouterLink>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project1.slug } }">
+            <div class="project-tile__media">
+              <img :src="project1.image" alt="Proyecto 01" class="project-tile__image">
+            </div>
+          </RouterLink>
+        </article>
+
+        <article class="project-tile">
+          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project2.slug } }">
+            <p class="project-tile__title">{{ project2.code }} {{ project2.title }}</p>
+          </RouterLink>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project2.slug } }">
+            <div class="project-tile__media">
+              <img :src="project2.image" alt="Proyecto 02" class="project-tile__image">
+            </div>
+          </RouterLink>
+        </article>
+      </div>
+    </section>
+    <section class="projects-gallery-screen projects-gallery-screen--offset" aria-label="Projects gallery continuation">
+      <div class="projects-gallery-grid projects-gallery-grid--offset">
+        <article class="project-tile">
+          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project3.slug } }">
+            <p class="project-tile__title">{{ project3.code }} {{ project3.title }}</p>
+          </RouterLink>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project3.slug } }">
+            <div class="project-tile__media">
+              <img :src="project3.image" alt="Proyecto 03" class="project-tile__image">
+            </div>
+          </RouterLink>
+        </article>
+
+        <article class="project-tile">
+          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project4.slug } }">
+            <p class="project-tile__title">{{ project4.code }} {{ project4.title }}</p>
+          </RouterLink>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project4.slug } }">
+            <div class="project-tile__media">
+              <img :src="project4.image" alt="Proyecto 04" class="project-tile__image">
+            </div>
+          </RouterLink>
+        </article>
+      </div>
+    </section>
+    <section class="projects-gallery-screen" aria-label="Projects gallery third screen">
+      <div class="projects-gallery-grid">
+        <article class="project-tile">
+          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project5.slug } }">
+            <p class="project-tile__title">{{ project5.code }} {{ project5.title }}</p>
+          </RouterLink>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project5.slug } }">
+            <div class="project-tile__media">
+              <img :src="project5.image" alt="Proyecto 05" class="project-tile__image">
+            </div>
+          </RouterLink>
+        </article>
+
+        <article class="project-tile">
+          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project6.slug } }">
+            <p class="project-tile__title">{{ project6.code }} {{ project6.title }}</p>
+          </RouterLink>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project6.slug } }">
+            <div class="project-tile__media">
+              <img :src="project6.image" alt="Proyecto 06" class="project-tile__image">
+            </div>
+          </RouterLink>
+        </article>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -66,7 +142,124 @@ const openEnvelope = () => {
   padding: 2rem 1.25rem 0;
 }
 
-.projects-white-screen {
+.projects-gallery-screen {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  padding: clamp(190px, 28vh, 260px) 1rem clamp(24px, 5vh, 56px);
+  display: flex;
+  align-items: flex-start;
+}
+
+.projects-gallery-grid {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  justify-items: start;
+  column-gap: 0;
+  row-gap: 32px;
+}
+
+.project-tile {
+  width: min(100%, 260px);
+  justify-self: start;
+}
+
+.project-tile:nth-child(1) {
+  grid-column: 1;
+}
+
+.project-tile:nth-child(2) {
+  grid-column: 3;
+}
+
+.projects-gallery-grid--offset .project-tile:nth-child(1) {
+  grid-column: 2;
+}
+
+.projects-gallery-grid--offset .project-tile:nth-child(2) {
+  grid-column: 4;
+}
+
+.project-tile__title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.project-tile__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-tile__media-link {
+  display: block;
+}
+
+.project-tile__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.75 / 1;
+  background: #0a3cae;
+  overflow: hidden;
+}
+
+.project-tile__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 0;
+  transition: opacity 160ms ease;
+  pointer-events: none;
+}
+
+.project-tile__media-link:hover .project-tile__media::after,
+.project-tile__media-link:focus-visible .project-tile__media::after {
+  opacity: 1;
+}
+
+.project-tile__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .projects-gallery-screen {
+    padding-top: 120px;
+  }
+
+  .projects-gallery-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 28px;
+  }
+
+  .project-tile {
+    width: min(100%, 280px);
+  }
+
+  .project-tile:nth-child(1),
+  .project-tile:nth-child(2),
+  .projects-gallery-grid--offset .project-tile:nth-child(1),
+  .projects-gallery-grid--offset .project-tile:nth-child(2) {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .projects-gallery-screen {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.projects-white-sheet {
   width: 100%;
   min-height: 100vh;
   background: #fff;
