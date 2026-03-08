@@ -15,7 +15,12 @@ type Dot = {
 }
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const CIRCLE_RADIUS = 22.5
+const CIRCLE_RADIUS = 17.5
+const MIN_CIRCLE_RADIUS = 5.5
+const BASE_STEP_FOR_FULL_RADIUS = 18
+const MIN_STEP = 8
+const RADIUS_SCALE_CURVE = 1.15
+const PORTFOLIO_VERTICAL_SHIFT = -70
 const LETTER_GAP = 1
 
 const glyphMap: Record<string, { rows: string[]; gap: number; extras?: Array<{ x: number; y: number }> }> = {
@@ -67,10 +72,10 @@ const pointer = {
 const photoButtons = [
   { left: "36.95%", top: "20.59%", skill: "VISUAL IDENTITY" },
   { left: "83.88%", top: "18.61%", skill: "BRANDING" },
-  { left: "calc(8.99% - 20px)", top: "calc(56.44% - 150px)", skill: "PACKAGING" },
+  { left: "6.9%", top: "38.6%", skill: "PACKAGING" },
   { left: "88.05%", top: "56.44%", skill: "EDITORIAL" },
-  { left: "22.48%", top: "80.79%", skill: "ILUSTRATION" },
-  { left: "62.72%", top: "69.70%", skill: "GRAPHIC DESIGN" },
+  { left: "19.8%", top: "86.5%", skill: "ILUSTRATION" },
+  { left: "67.2%", top: "69.70%", skill: "GRAPHIC DESIGN" },
 ]
 const hoveredSkillIndex = ref<number | null>(null)
 
@@ -78,6 +83,7 @@ type GlyphPoint = {
   gx: number
   gy: number
   letter: string
+  letterIndex: number
 }
 
 const buildWordPoints = (word: string) => {
@@ -98,7 +104,7 @@ const buildWordPoints = (word: string) => {
       ]
 
       for (const point of pPoints) {
-        points.push({ gx: cursorX + point.x, gy: point.y, letter: "P" })
+        points.push({ gx: cursorX + point.x, gy: point.y, letter: "P", letterIndex: i })
       }
 
       cursorX += 5 + gapAfter
@@ -114,7 +120,7 @@ const buildWordPoints = (word: string) => {
       ]
 
       for (const point of oPoints) {
-        points.push({ gx: cursorX + point.x, gy: point.y, letter: "O" })
+        points.push({ gx: cursorX + point.x, gy: point.y, letter: "O", letterIndex: i })
       }
 
       cursorX += 6 + gapAfter
@@ -134,7 +140,7 @@ const buildWordPoints = (word: string) => {
       ]
 
       for (const point of rPoints) {
-        points.push({ gx: cursorX + point.x, gy: point.y, letter: "R" })
+        points.push({ gx: cursorX + point.x, gy: point.y, letter: "R", letterIndex: i })
       }
 
       cursorX += 5 + gapAfter
@@ -148,7 +154,7 @@ const buildWordPoints = (word: string) => {
       ]
 
       for (const point of tPoints) {
-        points.push({ gx: cursorX + point.x, gy: point.y, letter: "T" })
+        points.push({ gx: cursorX + point.x, gy: point.y, letter: "T", letterIndex: i })
       }
 
       cursorX += 5 + gapAfter
@@ -164,14 +170,14 @@ const buildWordPoints = (word: string) => {
       const row = glyph.rows[y]
       for (let x = 0; x < row.length; x += 1) {
         if (row[x] === "1") {
-          points.push({ gx: cursorX + x, gy: y, letter: char })
+          points.push({ gx: cursorX + x, gy: y, letter: char, letterIndex: i })
         }
       }
     }
 
     if (glyph.extras) {
       for (const extraDot of glyph.extras) {
-        points.push({ gx: cursorX + extraDot.x, gy: extraDot.y, letter: char })
+        points.push({ gx: cursorX + extraDot.x, gy: extraDot.y, letter: char, letterIndex: i })
       }
     }
 
@@ -208,15 +214,20 @@ const layoutDots = () => {
   const usableWidth = Math.max(1, viewWidth - safeSide * 2 - CIRCLE_RADIUS * 2)
   const stepX = usableWidth / Math.max(1, gridWidth)
   const stepY = (viewHeight - 12) / (gridHeight + 1)
-  const step = Math.max(18, Math.min(stepX, stepY, 46))
-  dotRadius = CIRCLE_RADIUS
+  const step = Math.max(MIN_STEP, Math.min(stepX, stepY, 46))
+  const responsiveScale = Math.min(1, step / BASE_STEP_FOR_FULL_RADIUS)
+  dotRadius = Math.max(MIN_CIRCLE_RADIUS, CIRCLE_RADIUS * Math.pow(responsiveScale, RADIUS_SCALE_CURVE))
+  const letterSpacingBoost = (1 - responsiveScale) * step * 0.9
+  const scaledXPoints = points.map((point) => point.gx * step + point.letterIndex * letterSpacingBoost)
+  const minScaledX = Math.min(...scaledXPoints)
+  const maxScaledX = Math.max(...scaledXPoints)
 
-  const contentWidth = gridWidth * step
+  const contentWidth = maxScaledX - minScaledX
   const contentHeight = gridHeight * step
-  const offsetX = (viewWidth - contentWidth) / 2 - minGX * step
+  const offsetX = (viewWidth - contentWidth) / 2 - minScaledX
   const safeBottom = dotRadius * 3.1
   const safeTop = dotRadius * 0.8
-  const requestedOffsetY = Math.max(safeTop - minGY * step, viewHeight - contentHeight - safeBottom - minGY * step) - 15
+  const requestedOffsetY = Math.max(safeTop - minGY * step, viewHeight - contentHeight - safeBottom - minGY * step) + PORTFOLIO_VERTICAL_SHIFT
   const motionPad = dotRadius * 0.9
   const minOffsetY = dotRadius + motionPad - minGY * step
   const maxOffsetY = viewHeight - dotRadius - motionPad - maxGY * step
@@ -227,9 +238,9 @@ const layoutDots = () => {
     return {
       gx: point.gx,
       gy: point.gy,
-      baseX: offsetX + point.gx * step,
+      baseX: offsetX + point.gx * step + point.letterIndex * letterSpacingBoost,
       baseY: offsetY + point.gy * step,
-      radius: CIRCLE_RADIUS,
+      radius: dotRadius,
       phase: prev?.phase ?? Math.random() * Math.PI * 2,
       speed: prev?.speed ?? 0.22 + Math.random() * 0.2,
       amp: prev?.amp ?? step * (Math.random() < 0.2 ? 0.055 + Math.random() * 0.035 : 0),
@@ -420,8 +431,13 @@ onBeforeUnmount(() => {
 }
 
 .home-scroll-screen {
+  --hotspot-size: clamp(28px, 5.4vw, 50px);
+  --skill-font-size: clamp(10px, 1.5vw, 16px);
+  --skill-offset: calc(var(--hotspot-size) * -0.95);
+  --footer-gap: clamp(14px, 2.5vw, 30px);
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
   background: #fff;
   overflow: hidden;
   position: relative;
@@ -430,23 +446,25 @@ onBeforeUnmount(() => {
 }
 
 .home-scroll-screen__image {
-  width: 100vw;
-  height: calc(100vh + 30px);
+  width: 100%;
+  height: 100%;
   display: block;
   object-fit: cover;
   object-position: center top;
+  transform: translateY(calc(-1 * var(--footer-gap)));
 }
 
 .home-scroll-screen__buttons {
   position: absolute;
   inset: 0;
   z-index: 2;
+  transform: translateY(calc(-1 * var(--footer-gap)));
 }
 
 .home-scroll-screen__button {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: var(--hotspot-size);
+  height: var(--hotspot-size);
   border: 0;
   border-radius: 9999px;
   background: #fff;
@@ -460,13 +478,26 @@ onBeforeUnmount(() => {
 
 .home-scroll-screen__skill {
   position: absolute;
-  transform: translate(-50%, -46px);
+  transform: translate(-50%, var(--skill-offset));
   color: #0a3cae;
-  font-size: 16px;
+  font-size: var(--skill-font-size);
   line-height: 1;
   white-space: nowrap;
   text-transform: uppercase;
   pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .home-scroll-screen {
+    --hotspot-size: clamp(24px, 6vw, 42px);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-scroll-screen {
+    --hotspot-size: clamp(20px, 7.6vw, 34px);
+    --skill-font-size: clamp(9px, 2.7vw, 13px);
+  }
 }
 
 .portfolio-canvas {
