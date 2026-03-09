@@ -7,7 +7,6 @@ const props = defineProps<{
 }>()
 
 const project = computed(() => getProjectBySlug(props.slug))
-const isFirstProject = computed(() => props.slug === "lqnm-01")
 </script>
 
 <template>
@@ -15,9 +14,9 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
     <section class="project-detail-shell">
       <div class="project-detail-media">
         <img
-          v-if="isFirstProject"
-          src="/imagenes/projects/LQNM/gif%20motion%20graphics.gif"
-          alt="Motion graphics del proyecto LQNM"
+          v-if="project?.detailHeroMedia"
+          :src="project.detailHeroMedia"
+          :alt="`Hero visual del proyecto ${project.title}`"
           class="project-detail-image"
         >
         <img
@@ -52,19 +51,50 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
         </div>
       </section>
 
-      <section v-if="project?.detailBodySecondary" class="project-detail-extra">
-        <p class="project-detail-extra-text">
-          {{ project.detailBodySecondary }}
-        </p>
-
-        <div class="project-detail-extra-media">
+      <section v-if="project?.detailTextureMedia" class="project-detail-texture">
+        <div class="project-detail-texture-media">
           <img
-            v-if="project.detailMediaSecondary"
-            :src="project.detailMediaSecondary"
-            :alt="`Montaje del proyecto ${project.title}`"
-            class="project-detail-extra-image"
+            :src="project.detailTextureMedia"
+            :alt="`Textura del proyecto ${project.title}`"
+            class="project-detail-texture-image"
           >
         </div>
+        <p v-if="project.detailTextureBody" class="project-detail-texture-body">
+          {{ project.detailTextureBody }}
+        </p>
+      </section>
+
+      <section
+        v-if="project?.detailBodySecondary"
+        class="project-detail-extra"
+        :class="{ 'project-detail-extra--raised': project.detailSecondaryMediaFirst }"
+      >
+        <template v-if="project.detailSecondaryMediaFirst">
+          <div class="project-detail-extra-media project-detail-extra-media--first">
+            <img
+              v-if="project.detailMediaSecondary"
+              :src="project.detailMediaSecondary"
+              :alt="`Montaje del proyecto ${project.title}`"
+              class="project-detail-extra-image project-detail-extra-image--wide"
+            >
+          </div>
+          <p class="project-detail-extra-text project-detail-extra-text--after-media">
+            {{ project.detailBodySecondary }}
+          </p>
+        </template>
+        <template v-else>
+          <p class="project-detail-extra-text">
+            {{ project.detailBodySecondary }}
+          </p>
+          <div class="project-detail-extra-media">
+            <img
+              v-if="project.detailMediaSecondary"
+              :src="project.detailMediaSecondary"
+              :alt="`Montaje del proyecto ${project.title}`"
+              class="project-detail-extra-image"
+            >
+          </div>
+        </template>
       </section>
 
       <section v-if="project?.detailMediaStack?.length" class="project-detail-stack">
@@ -106,6 +136,26 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
           class="project-detail-logo-image"
         >
       </section>
+
+      <section v-if="project?.detailTypographyMedia" class="project-detail-typography-block">
+        <div class="project-detail-typography-meta">
+          <span>Logo</span>
+          <span>Main Text</span>
+        </div>
+        <img
+          :src="project.detailTypographyMedia"
+          :alt="`Tipografia del proyecto ${project.title}`"
+          class="project-detail-typography-image"
+        >
+      </section>
+
+      <section v-if="project?.detailFinalMedia" class="project-detail-final-block">
+        <img
+          :src="project.detailFinalMedia"
+          :alt="`Aplicacion final del proyecto ${project.title}`"
+          class="project-detail-final-image"
+        >
+      </section>
     </section>
   </main>
 </template>
@@ -118,6 +168,7 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
 
 .project-detail-shell {
   --detail-gap: calc(clamp(28px, 4vw, 42px) + 90px);
+  position: relative;
   margin: 0 auto;
   width: 100%;
   max-width: 1080px;
@@ -125,10 +176,11 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
 }
 
 .project-detail-media {
+  position: relative;
+  z-index: 1;
   margin: 0 auto;
   width: 100%;
-  max-width: 1080px;
-  background: #e29abf;
+  max-width: 1280px;
 }
 
 .project-detail-image {
@@ -147,6 +199,8 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
 }
 
 .project-detail-info {
+  position: relative;
+  z-index: 2;
   margin: var(--detail-gap) auto 0;
   width: 100%;
   max-width: 1080px;
@@ -189,6 +243,38 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
   object-fit: cover;
 }
 
+.project-detail-texture {
+  margin: var(--detail-gap) auto 0;
+  width: 100%;
+  max-width: 1080px;
+}
+
+.project-detail-texture-media {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1080px;
+}
+
+.project-detail-texture-image {
+  display: block;
+  width: 108%;
+  max-width: none;
+  height: auto;
+  margin: 0 auto;
+  transform: translateY(-150px) rotate(90deg) scale(1.15);
+  transform-origin: center center;
+}
+
+.project-detail-texture-body {
+  margin: var(--detail-gap) 0 0;
+  position: relative;
+  z-index: 3;
+  transform: translateY(-290px);
+  font-size: 12pt;
+  line-height: 1.2;
+}
+
 @media (max-width: 900px) {
   .project-detail-columns {
     grid-template-columns: 1fr;
@@ -206,6 +292,10 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
   max-width: 1080px;
 }
 
+.project-detail-extra--raised {
+  margin-top: calc(var(--detail-gap) - 100px);
+}
+
 .project-detail-extra-text {
   margin: 0;
   font-size: 12pt;
@@ -218,11 +308,33 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
   max-width: 1080px;
 }
 
+.project-detail-extra-media--first {
+  display: block;
+  margin-top: clamp(24px, 3vw, 40px);
+  margin-bottom: clamp(24px, 3vw, 40px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1080px;
+}
+
 .project-detail-extra-image {
   display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
+}
+
+.project-detail-extra-image--wide {
+  width: 128%;
+  max-width: none;
+  margin-left: 50%;
+  transform: translate(-50%, -300px);
+}
+
+.project-detail-extra-text--after-media {
+  margin-top: 0;
+  transform: translateY(-200px);
 }
 
 .project-detail-stack {
@@ -284,14 +396,64 @@ const isFirstProject = computed(() => props.slug === "lqnm-01")
   margin: calc(var(--detail-gap) - 70px) auto 0;
   width: 100%;
   max-width: 1080px;
+  position: relative;
+  z-index: 0;
+  transform: translateY(-300px);
 }
 
 .project-detail-logo-image {
   display: block;
-  width: min(560px, 80%);
+  width: min(980px, 100%);
   height: auto;
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
+}
+
+.project-detail-typography-block {
+  position: relative;
+  margin: calc(var(--detail-gap) - 40px) auto 0;
+  width: 100%;
+  max-width: 820px;
+  transform: translateY(-400px);
+}
+
+.project-detail-typography-meta {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 14pt;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.project-detail-typography-image {
+  display: block;
+  width: 135%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  margin-left: 50%;
+  transform: translate(-50%, 80px);
+}
+
+.project-detail-final-block {
+  margin: calc(var(--detail-gap) - 20px) auto 0;
+  width: 100%;
+  max-width: 1080px;
+  transform: translateY(-150px);
+}
+
+.project-detail-final-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 </style>

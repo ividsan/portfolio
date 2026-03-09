@@ -8,13 +8,19 @@ export type ProjectItem = {
   detailHeading?: string
   detailSubheading?: string
   detailBody?: string
+  detailHeroMedia?: string
   detailMedia?: string
+  detailTextureMedia?: string
+  detailTextureBody?: string
   detailBodySecondary?: string
   detailMediaSecondary?: string
+  detailSecondaryMediaFirst?: boolean
   detailMediaStack?: string[]
   detailBodyTertiary?: string
   detailMediaTertiary?: string
   detailLogo?: string
+  detailTypographyMedia?: string
+  detailFinalMedia?: string
 }
 
 export const projects: ProjectItem[] = [
@@ -28,6 +34,7 @@ export const projects: ProjectItem[] = [
       "Proyecto centrado en construir una narrativa visual limpia, con decisiones tipograficas y de encuadre orientadas a identidad de marca.",
     detailHeading: "Visual Identity",
     detailSubheading: "Social Awareness Campaign",
+    detailHeroMedia: "/imagenes/projects/LQNM/gif%20motion%20graphics.gif",
     detailBody:
       "\"Lo que nos mueve\" is a cross-disciplinary project from the first semester of the second year of the Design degree. It integrates the subjects of Communication Theory, Illustration, Typography, and Audiovisual Media. This group project was developed alongside Mar Albiol Marti, Alba Cardona Tudela, Sandra Perez Timoneda, Amanda Salto Mansilla, and Elena Pintado Vozmediano.",
     detailMedia: "/imagenes/projects/LQNM/cartel%20gif.gif",
@@ -47,11 +54,26 @@ export const projects: ProjectItem[] = [
   {
     slug: "lqnm-02",
     code: "02",
-    title: "LQNM",
+    title: "CREFAD 26",
     image: "/imagenes/guapa.png",
     summary: "Variacion del sistema visual con nuevas reglas de jerarquia.",
     description:
       "Segunda iteracion del proyecto para probar consistencia entre piezas y adaptar el lenguaje grafico a distintos formatos de salida.",
+    detailHeading: "Visual Identity",
+    detailSubheading: "Poster design",
+    detailHeroMedia: "/imagenes/projects/crefad/logo.png",
+    detailBody:
+      "CREFAD is a project developed for the Typography course,\nfocusing on the visual identity and poster design for the digital\nfabrication conference held at the UPV. This was a collaborative\nproject created alongside Mar Albiol Martí and Rocío Torres García.",
+    detailTextureMedia: "/imagenes/projects/crefad/texturas.gif",
+    detailTextureBody:
+      "Digital fabrication is often perceived as a cold, intangible process. For the CREFAD conference, we wanted to challenge this notion by highlighting its physical soul. Our concept explores the intersection between technology and tradition, merging 3D printing textures with manual stamping techniques. This project serves as a visual bridge, proving that innovation and craftsmanship are intrinsically linked through the language of materials.",
+    detailMediaSecondary: "/imagenes/projects/crefad/carteles.png",
+    detailSecondaryMediaFirst: true,
+    detailBodySecondary:
+      "We used 3D-printed textures as physical stamps, creating a visual dialogue between the precision of the machine and the organic imperfection of manual ink. A bold and structural logo designed to reflect the architectural nature of digital manufacturing, balanced with the warmth of traditional printmaking.",
+    detailLogo: "/imagenes/projects/crefad/logo.png",
+    detailTypographyMedia: "/imagenes/projects/crefad/tipograf%C3%ADa.gif",
+    detailFinalMedia: "/imagenes/projects/crefad/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif",
   },
   {
     slug: "lqnm-03",
