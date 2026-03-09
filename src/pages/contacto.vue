@@ -35,8 +35,8 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
 </script>
 
 <template>
-  <main class="px-4 pt-4 pb-1 sm:px-10 sm:pt-10 sm:pb-24 lg:pb-40">
-    <section class="mx-auto mt-[52px] w-full max-w-[720px] sm:mt-[85px] lg:origin-top lg:scale-[1.2]">
+  <main class="px-4 pt-4 pb-10 sm:px-10 sm:pt-10 sm:pb-24 lg:pb-40">
+    <section class="contact-shell mx-auto mt-[-22px] w-full max-w-[720px] sm:mt-[6px] lg:origin-top lg:scale-[1.2]">
       <h1 class="mb-2 text-center text-[18px] leading-none font-medium uppercase sm:mb-4 sm:text-[20px]">GOT A PROJECT? LET'S TALK</h1>
 
       <form class="relative border border-black text-[14px] leading-none" @submit.prevent="handleSubmit">
@@ -172,6 +172,10 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
 }
 
 @media (max-width: 900px) {
+  .contact-shell {
+    margin-top: 14px !important;
+  }
+
   form {
     font-size: 14px !important;
   }
@@ -199,6 +203,7 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
     transform: none;
   }
 }
+
 </style>
 
 

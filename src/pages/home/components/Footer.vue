@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-white px-4 pb-6 text-black md:px-10">
+  <footer class="bg-white px-4 pb-10 text-black md:px-10">
     <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:items-end">
       <div>
         <p class="text-[clamp(12px,3.6vw,14.67px)] leading-none font-normal uppercase">DON'T BE A STRANGER, SAY HI!</p>
