@@ -21,6 +21,10 @@ export type ProjectItem = {
   detailLogo?: string
   detailTypographyMedia?: string
   detailFinalMedia?: string
+  detailPosterTitle?: string
+  detailPosterImage?: string
+  detailPosterCaptionTitle?: string
+  detailPosterCaptionBody?: string
 }
 
 export const projects: ProjectItem[] = [
@@ -76,13 +80,34 @@ export const projects: ProjectItem[] = [
     detailFinalMedia: "/imagenes/projects/crefad/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif",
   },
   {
-    slug: "lqnm-03",
+    slug: "siete",
     code: "03",
-    title: "LQNM",
-    image: "/imagenes/guapa.png",
-    summary: "Desarrollo de look and feel para soporte digital e impreso.",
+    title: "Siete",
+    image: "/imagenes/projects/siete/Mockup1.jpg",
+    summary: "Serie de carteles inspirada en la avaricia de los Seven Deadly Sins.",
     description:
-      "Trabajo de direccion de arte y maquetacion con especial cuidado en ritmo visual, reticula y relacion entre imagen y texto.",
+      "Exploracion visual para un poster teatral centrado en \"Greed\". Tres lenguajes graficos se confrontan para mostrar distintas caras de la avaricia.",
+    detailHeading: "Poster design series",
+    detailSubheading: "Seven Deadly Sins — Greed",
+    detailHeroMedia: "/imagenes/projects/siete/tot.jpg",
+    detailBody:
+      "Siete is a design project focused on the visual exploration of the Seven Deadly Sins. This chapter tackles \"Greed\" through three disruptive graphic languages conceived for a theatrical play poster. A collaborative work made with Alba Cardona Tudela.",
+    detailMedia: "/imagenes/projects/siete/documento-sin-titulo.jpg",
+    detailBodySecondary:
+      "Each composition exaggerates accumulation: dense typographic grids, fluorescent overlays, and overlapping textures evoke the excess that defines greed. The system works across print mockups and motion snippets, pushing the same idea into different materialities.",
+    detailMediaSecondary: "/imagenes/projects/siete/Mockup3.jpg",
+    detailMediaStack: [
+      "/imagenes/projects/siete/gifescaneado.gif",
+      "/imagenes/projects/siete/gifplano.gif",
+    ],
+    detailBodyTertiary:
+      "Motion tests translate the poster into a breathing surface where letters pulse and compress, reinforcing the feeling of insatiable desire. The result is a loud, unapologetic visual statement that refuses to feel comfortable.",
+    detailMediaTertiary: "/imagenes/projects/siete/diseno-sin-titulo-1.gif",
+    detailPosterTitle: "siete",
+    detailPosterImage: "/imagenes/projects/siete/diseno-sin-titulo-1.gif",
+    detailPosterCaptionTitle: "PROPOSAL 01: SCAN AND POTOGRAPHY",
+    detailPosterCaptionBody:
+      "Using photography and scanning techniques to capture a distorted reality. The human element becomes a resource to represent the obsession and hoarding nature of greed.",
   },
   {
     slug: "lqnm-04",

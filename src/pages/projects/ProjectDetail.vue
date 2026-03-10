@@ -7,6 +7,7 @@ const props = defineProps<{
 }>()
 
 const project = computed(() => getProjectBySlug(props.slug))
+const isSiete = computed(() => project.value?.slug === "siete")
 </script>
 
 <template>
@@ -41,7 +42,7 @@ const project = computed(() => getProjectBySlug(props.slug))
           </p>
         </div>
 
-        <div class="project-detail-secondary-media">
+        <div class="project-detail-secondary-media" v-if="!isSiete">
           <img
             v-if="project.detailMedia"
             :src="project.detailMedia"
@@ -51,7 +52,7 @@ const project = computed(() => getProjectBySlug(props.slug))
         </div>
       </section>
 
-      <section v-if="project?.detailTextureMedia" class="project-detail-texture">
+      <section v-if="project?.detailTextureMedia && !isSiete" class="project-detail-texture">
         <div class="project-detail-texture-media">
           <img
             :src="project.detailTextureMedia"
@@ -65,7 +66,7 @@ const project = computed(() => getProjectBySlug(props.slug))
       </section>
 
       <section
-        v-if="project?.detailBodySecondary"
+        v-if="project?.detailBodySecondary && !isSiete"
         class="project-detail-extra"
         :class="{ 'project-detail-extra--raised': project.detailSecondaryMediaFirst }"
       >
@@ -97,7 +98,29 @@ const project = computed(() => getProjectBySlug(props.slug))
         </template>
       </section>
 
-      <section v-if="project?.detailMediaStack?.length" class="project-detail-stack">
+      <section v-if="(project?.detailPosterImage || project?.detailPosterTitle) && !isSiete" class="project-detail-poster">
+        <h1 v-if="project?.detailPosterTitle" class="project-detail-poster-title">
+          {{ project.detailPosterTitle }}
+        </h1>
+        <div class="project-detail-poster-frame">
+          <img
+            v-if="project?.detailPosterImage"
+            :src="project.detailPosterImage"
+            :alt="`Propuesta visual del proyecto ${project.title}`"
+            class="project-detail-poster-image"
+          >
+        </div>
+        <div v-if="project?.detailPosterCaptionTitle" class="project-detail-poster-caption">
+          <p class="project-detail-poster-caption-title">
+            {{ project.detailPosterCaptionTitle }}
+          </p>
+          <p v-if="project.detailPosterCaptionBody" class="project-detail-poster-caption-body">
+            {{ project.detailPosterCaptionBody }}
+          </p>
+        </div>
+      </section>
+
+      <section v-if="project?.detailMediaStack?.length && !isSiete" class="project-detail-stack">
         <div
           v-for="(mediaSrc, index) in project.detailMediaStack"
           :key="`detail-stack-${index}`"
@@ -115,7 +138,7 @@ const project = computed(() => getProjectBySlug(props.slug))
         </div>
       </section>
 
-      <section v-if="project?.detailBodyTertiary" class="project-detail-tertiary">
+      <section v-if="project?.detailBodyTertiary && !isSiete" class="project-detail-tertiary">
         <p class="project-detail-tertiary-text">
           {{ project.detailBodyTertiary }}
         </p>
@@ -129,7 +152,7 @@ const project = computed(() => getProjectBySlug(props.slug))
         </div>
       </section>
 
-      <section v-if="project?.detailLogo" class="project-detail-logo-block">
+      <section v-if="project?.detailLogo && !isSiete" class="project-detail-logo-block">
         <img
           :src="project.detailLogo"
           :alt="`Logo del proyecto ${project.title}`"
@@ -137,7 +160,7 @@ const project = computed(() => getProjectBySlug(props.slug))
         >
       </section>
 
-      <section v-if="project?.detailTypographyMedia" class="project-detail-typography-block">
+      <section v-if="project?.detailTypographyMedia && !isSiete" class="project-detail-typography-block">
         <div class="project-detail-typography-meta">
           <span>Logo</span>
           <span>Main Text</span>
@@ -149,12 +172,60 @@ const project = computed(() => getProjectBySlug(props.slug))
         >
       </section>
 
-      <section v-if="project?.detailFinalMedia" class="project-detail-final-block">
+      <section v-if="project?.detailFinalMedia && !isSiete" class="project-detail-final-block">
         <img
           :src="project.detailFinalMedia"
           :alt="`Aplicacion final del proyecto ${project.title}`"
           class="project-detail-final-image"
         >
+      </section>
+
+      <section v-if="isSiete" class="project-detail-siete-extra">
+        <h1 class="project-detail-siete-title">siete</h1>
+        <div class="project-detail-siete-frame">
+          <img
+            src="/imagenes/projects/siete/diseno-sin-titulo-1.gif"
+            alt="Propuesta 01: Scan and Photography del proyecto Siete"
+            class="project-detail-siete-image"
+          >
+        </div>
+        <div class="project-detail-siete-caption">
+          <p class="project-detail-siete-caption-title">PROPOSAL 01: SCAN AND POTOGRAHY</p>
+          <p class="project-detail-siete-caption-body">
+            Using photography and scanning techniques to capture a distorted reality. The human element becomes a
+            resource to represent the obsession and hoarding nature of greed.
+          </p>
+        </div>
+
+        <div class="project-detail-siete-frame project-detail-siete-frame--narrow">
+          <img
+            src="/imagenes/projects/siete/Mockup3.jpg"
+            alt="Propuesta 02: Texture del proyecto Siete"
+            class="project-detail-siete-image project-detail-siete-image--narrow"
+          >
+        </div>
+        <div class="project-detail-siete-caption project-detail-siete-caption--narrow">
+          <p class="project-detail-siete-caption-title">PROPOSAL 02: TEXTURE</p>
+          <p class="project-detail-siete-caption-body">
+            An exploration of metallic and organic textures. A tactile approach where the sin is manifested through visual
+            weight and material density, conveying the oppressive nature of greed.
+          </p>
+        </div>
+
+        <div class="project-detail-siete-frame project-detail-siete-frame--wide">
+          <img
+            src="/imagenes/projects/siete/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif"
+            alt="Propuesta 03 del proyecto Siete"
+            class="project-detail-siete-image"
+          >
+        </div>
+        <div class="project-detail-siete-caption project-detail-siete-caption--wide">
+          <p class="project-detail-siete-caption-title">PROPOSAL 03: GEOMETRY & FLAT INKS</p>
+          <p class="project-detail-siete-caption-body">
+            A minimalist and structural approach. Using geometric shapes and flat colors to represent the cold,
+            calculated, and systematic side of the sin.
+          </p>
+        </div>
       </section>
     </section>
   </main>
@@ -343,6 +414,55 @@ const project = computed(() => getProjectBySlug(props.slug))
   max-width: 1080px;
 }
 
+.project-detail-poster {
+  margin: var(--detail-gap) auto 0;
+  width: 100%;
+  max-width: 1080px;
+  text-align: center;
+}
+
+.project-detail-poster-title {
+  margin: 0 0 clamp(18px, 3vw, 28px);
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  text-transform: lowercase;
+}
+
+.project-detail-poster-frame {
+  position: relative;
+  width: 100%;
+  background: #f6f6f6;
+  padding: clamp(22px, 3vw, 32px);
+  border: 3px solid #141414;
+  box-shadow: inset 0 0 0 1px #141414;
+}
+
+.project-detail-poster-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+}
+
+.project-detail-poster-caption {
+  margin-top: clamp(18px, 2.5vw, 26px);
+  text-align: left;
+  font-size: 12pt;
+  line-height: 1.25;
+}
+
+.project-detail-poster-caption-title {
+  margin: 0 0 6px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.project-detail-poster-caption-body {
+  margin: 0;
+}
+
 .project-detail-stack-item + .project-detail-stack-item {
   margin-top: var(--detail-gap);
 }
@@ -456,4 +576,101 @@ const project = computed(() => getProjectBySlug(props.slug))
   height: auto;
   object-fit: cover;
 }
+
+.project-detail-siete-extra {
+  margin: var(--detail-gap) auto clamp(120px, 18vh, 200px);
+  width: 100%;
+  max-width: 1140px;
+  text-align: center;
+}
+
+.project-detail-siete-title {
+  margin: 0 0 clamp(18px, 3vw, 28px);
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  text-transform: lowercase;
+}
+
+.project-detail-siete-frame {
+  margin: clamp(22px, 3vw, 32px) auto;
+  padding: 0;
+  background: transparent;
+  max-width: 1280px;
+}
+
+.project-detail-siete-frame--narrow {
+  max-width: 520px;
+  margin-top: clamp(42px, 6vw, 72px);
+  margin-bottom: 0;
+}
+
+.project-detail-siete-image {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  height: auto;
+  object-fit: contain;
+  background: transparent;
+}
+
+.project-detail-siete-image--narrow {
+  width: 100%;
+}
+
+.project-detail-siete-caption {
+  margin: clamp(18px, 3vw, 28px) auto 0;
+  max-width: 1280px;
+  width: 100%;
+  text-align: left;
+  font-size: 12pt;
+  line-height: 1.25;
+}
+
+.project-detail-siete-caption--narrow {
+  max-width: 1280px;
+  width: 100%;
+  margin-top: clamp(48px, 7vw, 88px);
+  margin-bottom: clamp(48px, 7vw, 88px);
+}
+
+.project-detail-siete-caption-title {
+  margin: 0 0 6px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.project-detail-siete-caption-body {
+  margin: 0;
+}
+
+.project-detail-siete-row {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: clamp(22px, 4vw, 48px);
+  align-items: center;
+  margin: clamp(32px, 5vw, 56px) auto 0;
+  max-width: 1280px;
+}
+
+.project-detail-siete-item {
+  width: 100%;
+}
+
+.project-detail-siete-item--vertical .project-detail-siete-image {
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-detail-siete-caption--wide {
+  max-width: 1280px;
+  width: 100%;
+  margin-top: clamp(24px, 4vw, 40px);
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
 </style>
+.project-detail-siete-frame--wide {
+  margin-top: 0;
+}
