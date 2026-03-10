@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed, onMounted, onUnmounted, ref } from "vue"
 import { getProjectBySlug } from "./data"
 
 const props = defineProps<{
@@ -8,6 +8,38 @@ const props = defineProps<{
 
 const project = computed(() => getProjectBySlug(props.slug))
 const isSiete = computed(() => project.value?.slug === "siete")
+const isRevista = computed(() => project.value?.slug === "revista-01")
+
+const revistaSlides = computed(() =>
+  isRevista.value
+    ? [
+      "/imagenes/projects/revista/1.jpg",
+      "/imagenes/projects/revista/2.jpg",
+      "/imagenes/projects/revista/3.jpg",
+      "/imagenes/projects/revista/4.jpg",
+    ]
+    : [],
+)
+
+const currentSlide = ref(0)
+const currentSlideSrc = computed(() => revistaSlides.value[currentSlide.value])
+
+let autoplayTimer: ReturnType<typeof setInterval> | undefined
+
+const nextSlide = () => {
+  if (!revistaSlides.value.length) return
+  currentSlide.value = (currentSlide.value + 1) % revistaSlides.value.length
+}
+
+onMounted(() => {
+  if (revistaSlides.value.length) {
+    autoplayTimer = setInterval(nextSlide, 2000)
+  }
+})
+
+onUnmounted(() => {
+  if (autoplayTimer) clearInterval(autoplayTimer)
+})
 </script>
 
 <template>
@@ -41,6 +73,16 @@ const isSiete = computed(() => project.value?.slug === "siete")
             {{ project.detailBody }}
           </p>
         </div>
+
+        <section v-if="isRevista" class="project-detail-carousel" aria-label="Galería Revista Artículo 1">
+          <div class="about-magazine__viewport">
+            <img
+              :src="currentSlideSrc"
+              :alt="`Página ${currentSlide + 1} revista`"
+              class="about-magazine__image"
+            >
+          </div>
+        </section>
 
         <div class="project-detail-secondary-media" v-if="!isSiete">
           <img
@@ -297,6 +339,26 @@ const isSiete = computed(() => project.value?.slug === "siete")
   max-width: 660px;
   line-height: 1.1;
   font-size: 12pt;
+}
+
+.project-detail-carousel {
+  margin-top: calc(clamp(28px, 4vw, 44px) + 60px);
+}
+
+.about-magazine__viewport {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.about-magazine__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .project-detail-secondary-media {

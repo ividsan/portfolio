@@ -110,13 +110,18 @@ export const projects: ProjectItem[] = [
       "Using photography and scanning techniques to capture a distorted reality. The human element becomes a resource to represent the obsession and hoarding nature of greed.",
   },
   {
-    slug: "lqnm-04",
+    slug: "revista-01",
     code: "04",
-    title: "LQNM",
-    image: "/imagenes/guapa.png",
-    summary: "Serie fotografica aplicada a un sistema grafico modular.",
+    title: "Revista — Artículo 1",
+    image: "/imagenes/projects/revista/1.jpg",
+    summary: "Maquetación editorial centrada en salud mental y bienestar creativo.",
     description:
-      "Investigacion de variaciones cromaticas, recortes y escalas para mantener una identidad reconocible en todos los soportes.",
+      "Diseño de una doble página editorial que equilibra densidad textual con claridad visual, enfocada en salud mental dentro de la industria creativa.",
+    detailHeading: "Editorial Design & Typography",
+    detailSubheading: "Salud mental en diseñadores",
+    detailBody:
+      "\"The Mindful Designer\" is an editorial project focused on the intersection of mental health and the creative industry. The challenge was to create a layout that balanced the density of a theoretical article with a visual language that reflects serenity and professional rigor. Using a structured grid and a minimalist color palette, the design prioritizes readability and emotional well-being, mirroring the very topic the article discusses.",
+    detailHeroMedia: "/imagenes/projects/revista/1.jpg",
   },
   {
     slug: "lqnm-05",
