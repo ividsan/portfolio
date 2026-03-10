@@ -67,7 +67,7 @@ export const projects: ProjectItem[] = [
     detailSubheading: "Poster design",
     detailHeroMedia: "/imagenes/projects/crefad/logo.png",
     detailBody:
-      "CREFAD is a project developed for the Typography course,\nfocusing on the visual identity and poster design for the digital\nfabrication conference held at the UPV. This was a collaborative\nproject created alongside Mar Albiol Martí and Rocío Torres García.",
+      "CREFAD is a project developed for the Typography course,\nfocused on the visual identity and poster design for the digital\nfabrication conference held at the UPV. This was a collaborative\nproject created alongside Mar Albiol Martí and Rocío Torres García.",
     detailTextureMedia: "/imagenes/projects/crefad/texturas.gif",
     detailTextureBody:
       "Digital fabrication is often perceived as a cold, intangible process. For the CREFAD conference, we wanted to challenge this notion by highlighting its physical soul. Our concept explores the intersection between technology and tradition, merging 3D printing textures with manual stamping techniques. This project serves as a visual bridge, proving that innovation and craftsmanship are intrinsically linked through the language of materials.",
@@ -124,8 +124,21 @@ export const projects: ProjectItem[] = [
     detailHeroMedia: "/imagenes/projects/revista/1.jpg",
   },
   {
-    slug: "lqnm-05",
+    slug: "comic",
     code: "05",
+    title: "Cómic",
+    image: "/imagenes/projects/c%C3%B3mic/mockup-color.jpg",
+    summary: "Narrativa visual autobiográfica en formato cómic.",
+    description:
+      "Exploración secuencial que mezcla ilustración y storytelling personal sobre una noche de verano y el caos compartido.",
+    detailHeading: "Sequential illustration & Comic",
+    detailBody:
+      "An autobiographical visual narrative about a summer night, an unexpected guest, and the chaos of shared living.",
+    detailHeroMedia: "/imagenes/projects/c%C3%B3mic/mockup-color.jpg",
+  },
+  {
+    slug: "lqnm-05",
+    code: "06",
     title: "LQNM",
     image: "/imagenes/guapa.png",
     summary: "Propuesta final de narrativa visual para portfolio.",
@@ -134,7 +147,7 @@ export const projects: ProjectItem[] = [
   },
   {
     slug: "lqnm-06",
-    code: "06",
+    code: "07",
     title: "LQNM",
     image: "/imagenes/guapa.png",
     summary: "Cierre del sistema con documentacion de criterios.",

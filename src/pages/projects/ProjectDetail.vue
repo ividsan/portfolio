@@ -9,15 +9,16 @@ const props = defineProps<{
 const project = computed(() => getProjectBySlug(props.slug))
 const isSiete = computed(() => project.value?.slug === "siete")
 const isRevista = computed(() => project.value?.slug === "revista-01")
+const isComic = computed(() => project.value?.slug === "comic")
 
 const revistaSlides = computed(() =>
   isRevista.value
     ? [
-      "/imagenes/projects/revista/1.jpg",
-      "/imagenes/projects/revista/2.jpg",
-      "/imagenes/projects/revista/3.jpg",
-      "/imagenes/projects/revista/4.jpg",
-    ]
+        "/imagenes/projects/revista/1.jpg",
+        "/imagenes/projects/revista/2.jpg",
+        "/imagenes/projects/revista/3.jpg",
+        "/imagenes/projects/revista/4.jpg",
+      ]
     : [],
 )
 
@@ -44,7 +45,63 @@ onUnmounted(() => {
 
 <template>
   <main class="project-detail-page px-4 py-6 md:px-9 md:py-8">
-    <section class="project-detail-shell">
+    <section v-if="isComic && project" class="comic-detail">
+
+      <div class="comic-hero-frame">
+        <img
+          :src="project.detailHeroMedia || project.image"
+          :alt="`Mockup a color del proyecto ${project.title}`"
+          class="comic-hero-image"
+        >
+      </div>
+
+      <section class="comic-intro">
+        <h2 class="comic-heading">{{ project.detailHeading }}</h2>
+        <p class="comic-body">{{ project.detailBody }}</p>
+      </section>
+
+      <section class="comic-secondary">
+        <div class="comic-secondary-frame">
+          <img
+            src="/imagenes/projects/c%C3%B3mic/bn.png"
+            alt="Comic en blanco y negro del proyecto"
+            class="comic-secondary-image"
+          >
+        </div>
+        <p class="comic-secondary-text">
+          "OKUPA" is a sequential illustration project that transforms a personal anecdote into a dynamic two-page comic.
+          The story follows a chaotic encounter with a cockroach during a summer night in Valencia. The challenge was to
+          translate a real-life experience into a visual sequence, balancing humor, tension, and a clear narrative flow.
+          The project explores the use of "visual metaphors" through color to represent emotional shifts: from the calm
+          "rose-colored" world to the vibrant green of repulsion.
+        </p>
+      </section>
+
+      <section class="comic-process">
+        <div class="comic-process-frame">
+          <img
+            src="/imagenes/projects/c%C3%B3mic/mockup-bn.jpg"
+            alt="Mockup en blanco y negro del proyecto"
+            class="comic-process-image"
+          >
+        </div>
+        <p class="comic-process-text">
+          The process began with traditional graphite and ink on paper, later digitized for digital coloring in Procreate.
+          This allowed for a clean, bold line-art that maintains the energy of the original sketches. Color is used as a
+          storytelling tool. A pastel pink palette establishes the initial "normalcy," which is abruptly interrupted by
+          high-contrast tones and "toxic" greens to emphasize the intruder's presence.
+        </p>
+        <div class="comic-process-frame">
+          <img
+            src="/imagenes/projects/c%C3%B3mic/color.jpg"
+            alt="Ilustracion a color del proyecto"
+            class="comic-process-image"
+          >
+        </div>
+      </section>
+    </section>
+
+    <section v-else class="project-detail-shell">
       <div class="project-detail-media">
         <img
           v-if="project?.detailHeroMedia"
@@ -279,6 +336,115 @@ onUnmounted(() => {
   background: #fff;
 }
 
+.comic-detail {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  --comic-frame-pad: clamp(12px, 2vw, 20px);
+  --comic-image-max: 1180px;
+}
+
+
+.comic-hero-frame {
+  background: #0a0a0a;
+  padding: var(--comic-frame-pad);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comic-hero-image {
+  width: 100%;
+  max-width: var(--comic-image-max);
+  height: auto;
+  display: block;
+}
+
+.comic-intro {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(18px, 4vw, 46px);
+  align-items: center;
+  margin-top: clamp(22px, 4vw, 42px);
+  padding: 0 clamp(4px, 3vw, 28px);
+  font-size: 12pt;
+  line-height: 1.35;
+}
+
+.comic-heading {
+  margin: 0;
+  font-size: 14pt;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.comic-body {
+  margin: 0;
+  max-width: 720px;
+}
+
+.comic-secondary {
+  margin-top: clamp(28px, 6vw, 56px);
+  display: grid;
+  gap: clamp(18px, 4vw, 32px);
+}
+
+.comic-secondary-frame {
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  padding: var(--comic-frame-pad);
+}
+
+.comic-secondary-image {
+  width: 100%;
+  max-width: var(--comic-image-max);
+  height: auto;
+  display: block;
+}
+
+.comic-secondary-text {
+  margin: 0 auto;
+  font-size: 12pt;
+  line-height: 1.35;
+  width: 100%;
+  max-width: var(--comic-image-max);
+}
+
+.comic-process {
+  margin-top: clamp(32px, 7vw, 68px);
+  display: grid;
+  gap: clamp(18px, 4vw, 32px);
+}
+
+.comic-process-frame {
+  display: flex;
+  justify-content: center;
+  background: #0a0a0a;
+  padding: var(--comic-frame-pad);
+}
+
+.comic-process-image {
+  width: 100%;
+  max-width: var(--comic-image-max);
+  height: auto;
+  display: block;
+}
+
+.comic-process-text {
+  margin: 0 auto;
+  font-size: 12pt;
+  line-height: 1.35;
+  width: 100%;
+  max-width: var(--comic-image-max);
+}
+
+@media (max-width: 900px) {
+  .comic-intro {
+    grid-template-columns: 1fr;
+  }
+}
+
 .project-detail-shell {
   --detail-gap: calc(clamp(28px, 4vw, 42px) + 90px);
   position: relative;
@@ -416,7 +582,6 @@ onUnmounted(() => {
   .project-detail-body {
     max-width: none;
   }
-
 }
 
 .project-detail-extra {
@@ -732,7 +897,8 @@ onUnmounted(() => {
   margin-top: clamp(24px, 4vw, 40px);
   margin-bottom: clamp(24px, 4vw, 40px);
 }
-</style>
+
 .project-detail-siete-frame--wide {
   margin-top: 0;
 }
+</style>
