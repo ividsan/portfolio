@@ -38,21 +38,21 @@ export const projects: ProjectItem[] = [
       "Proyecto centrado en construir una narrativa visual limpia, con decisiones tipograficas y de encuadre orientadas a identidad de marca.",
     detailHeading: "Visual Identity",
     detailSubheading: "Social Awareness Campaign",
-    detailHeroMedia: "/imagenes/projects/LQNM/gif%20motion%20graphics.gif",
+    detailHeroMedia: "/imagenes/projects/LQNM/gif%20motion%20graphics.mp4",
     detailBody:
       "\"Lo que nos mueve\" is a cross-disciplinary project from the first semester of the second year of the Design degree. It integrates the subjects of Communication Theory, Illustration, Typography, and Audiovisual Media. This group project was developed alongside Mar Albiol Marti, Alba Cardona Tudela, Sandra Perez Timoneda, Amanda Salto Mansilla, and Elena Pintado Vozmediano.",
-    detailMedia: "/imagenes/projects/LQNM/cartel%20gif.gif",
+    detailMedia: "/imagenes/projects/LQNM/cartel%20gif.mp4",
     detailBodySecondary:
       "We live in a society where individualism has diluted the sense of community. \"Lo que nos mueve\" is a cross-disciplinary project born to bridge the intergenerational gap. Through visual horizontality, we seek to connect youth and seniors through the only thing that knows no age: shared passions.",
-    detailMediaSecondary: "/imagenes/projects/LQNM/montaje.gif",
+    detailMediaSecondary: "/imagenes/projects/LQNM/montaje.mp4",
     detailMediaStack: [
       "/imagenes/projects/LQNM/tipograf%C3%ADa.png",
-      "/imagenes/projects/LQNM/Sin-t%C3%ADtulo-1.gif",
-      "/imagenes/projects/LQNM/gif%20mupi.gif",
+      "/imagenes/projects/LQNM/Sin-t%C3%ADtulo-1.mp4",
+      "/imagenes/projects/LQNM/gif%20mupi.mp4",
     ],
     detailBodyTertiary:
       "This identity merges editorial illustration with an urban branding aesthetic to break stereotypes and emphasize human connection. Through organic shapes and fluid lines, the project achieves an inclusive visual language that places youth and seniors on equal footing, prioritizing shared passions over age. All this is articulated through a vibrant palette and contemporary visual codes, transforming intergenerational interaction into a fresh and modern experience.",
-    detailMediaTertiary: "/imagenes/projects/LQNM/gif%20tr%C3%ADptico.gif",
+    detailMediaTertiary: "/imagenes/projects/LQNM/gif%20tr%C3%ADptico.mp4",
     detailLogo: "/imagenes/projects/LQNM/lqnm%20logo.png",
   },
   {
@@ -68,7 +68,7 @@ export const projects: ProjectItem[] = [
     detailHeroMedia: "/imagenes/projects/crefad/logo.png",
     detailBody:
       "CREFAD is a project developed for the Typography course,\nfocused on the visual identity and poster design for the digital\nfabrication conference held at the UPV. This was a collaborative\nproject created alongside Mar Albiol Martí and Rocío Torres García.",
-    detailTextureMedia: "/imagenes/projects/crefad/texturas.gif",
+    detailTextureMedia: "/imagenes/projects/crefad/texturas.mp4",
     detailTextureBody:
       "Digital fabrication is often perceived as a cold, intangible process. For the CREFAD conference, we wanted to challenge this notion by highlighting its physical soul. Our concept explores the intersection between technology and tradition, merging 3D printing textures with manual stamping techniques. This project serves as a visual bridge, proving that innovation and craftsmanship are intrinsically linked through the language of materials.",
     detailMediaSecondary: "/imagenes/projects/crefad/carteles.png",
@@ -76,8 +76,8 @@ export const projects: ProjectItem[] = [
     detailBodySecondary:
       "We used 3D-printed textures as physical stamps, creating a visual dialogue between the precision of the machine and the organic imperfection of manual ink. A bold and structural logo designed to reflect the architectural nature of digital manufacturing, balanced with the warmth of traditional printmaking.",
     detailLogo: "/imagenes/projects/crefad/logo.png",
-    detailTypographyMedia: "/imagenes/projects/crefad/tipograf%C3%ADa.gif",
-    detailFinalMedia: "/imagenes/projects/crefad/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif",
+    detailTypographyMedia: "/imagenes/projects/crefad/tipograf%C3%ADa.mp4",
+    detailFinalMedia: "/imagenes/projects/crefad/Dise%C3%B1o%20sin%20t%C3%ADtulo.mp4",
   },
   {
     slug: "siete",
@@ -97,14 +97,14 @@ export const projects: ProjectItem[] = [
       "Each composition exaggerates accumulation: dense typographic grids, fluorescent overlays, and overlapping textures evoke the excess that defines greed. The system works across print mockups and motion snippets, pushing the same idea into different materialities.",
     detailMediaSecondary: "/imagenes/projects/siete/Mockup3.jpg",
     detailMediaStack: [
-      "/imagenes/projects/siete/gifescaneado.gif",
-      "/imagenes/projects/siete/gifplano.gif",
+      "/imagenes/projects/siete/gifescaneado.mp4",
+      "/imagenes/projects/siete/gifplano.mp4",
     ],
     detailBodyTertiary:
       "Motion tests translate the poster into a breathing surface where letters pulse and compress, reinforcing the feeling of insatiable desire. The result is a loud, unapologetic visual statement that refuses to feel comfortable.",
-    detailMediaTertiary: "/imagenes/projects/siete/diseno-sin-titulo-1.gif",
+    detailMediaTertiary: "/imagenes/projects/siete/diseno-sin-titulo-1.mp4",
     detailPosterTitle: "siete",
-    detailPosterImage: "/imagenes/projects/siete/diseno-sin-titulo-1.gif",
+    detailPosterImage: "/imagenes/projects/siete/diseno-sin-titulo-1.mp4",
     detailPosterCaptionTitle: "PROPOSAL 01: SCAN AND POTOGRAPHY",
     detailPosterCaptionBody:
       "Using photography and scanning techniques to capture a distorted reality. The human element becomes a resource to represent the obsession and hoarding nature of greed.",

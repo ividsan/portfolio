@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue"
+import { Button } from "@/components/ui/button"
 
 const services = [
   "VISUAL IDENTITY / BRANDING",
@@ -115,12 +116,14 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
             Debes marcar al menos un servicio u Other.
           </p>
 
-          <button
+          <Button
             type="submit"
-            class="absolute right-0 bottom-0 flex h-[44px] w-[180px] cursor-pointer items-start justify-start border-l border-t border-black p-1.5 text-left text-[14px] leading-none font-medium uppercase transition-colors sm:h-[52px] sm:p-2 hover:text-[#002FA7] focus:text-[#002FA7]"
+            variant="ghost"
+            size="sm"
+            class="absolute right-0 bottom-0 flex h-[44px] w-[180px] cursor-pointer items-start justify-start rounded-none border-l border-t border-black bg-transparent p-1.5 text-left text-[14px] leading-none font-medium uppercase shadow-none transition-colors hover:text-[#002FA7] focus:text-[#002FA7] sm:h-[52px] sm:p-2"
           >
             SEND
-          </button>
+          </Button>
         </div>
       </form>
 

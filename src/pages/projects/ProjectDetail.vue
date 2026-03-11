@@ -14,6 +14,7 @@ const isRevista = computed(() => project.value?.slug === "revista-01")
 const isComic = computed(() => project.value?.slug === "comic")
 const isLirios = computed(() => project.value?.slug === "lirios")
 const isCrefad = computed(() => project.value?.slug === "lqnm-02")
+const isVideoFile = (src?: string) => Boolean(src && src.match(/\.(mp4|webm)$/i))
 
 const revistaSlides = computed(() =>
   isRevista.value
@@ -236,8 +237,20 @@ onUnmounted(() => {
 
     <section v-else class="project-detail-shell">
       <div class="project-detail-media">
+        <video
+          v-if="project?.detailHeroMedia && isVideoFile(project.detailHeroMedia)"
+          class="project-detail-image"
+          :aria-label="`Hero visual del proyecto ${project.title}`"
+          muted
+          loop
+          autoplay
+          playsinline
+        >
+          <source :src="project.detailHeroMedia" type="video/mp4">
+          Tu navegador no soporta video embebido.
+        </video>
         <img
-          v-if="project?.detailHeroMedia"
+          v-else-if="project?.detailHeroMedia"
           :src="project.detailHeroMedia"
           :alt="`Hero visual del proyecto ${project.title}`"
           class="project-detail-image"
@@ -275,8 +288,19 @@ onUnmounted(() => {
         </section>
 
         <div class="project-detail-secondary-media" v-if="!isSiete">
+          <video
+            v-if="project.detailMedia && isVideoFile(project.detailMedia)"
+            class="project-detail-secondary-image"
+            muted
+            loop
+            autoplay
+            playsinline
+          >
+            <source :src="project.detailMedia" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
           <img
-            v-if="project.detailMedia"
+            v-else-if="project.detailMedia"
             :src="project.detailMedia"
             :alt="`Detalle visual ${project.title}`"
             class="project-detail-secondary-image"
@@ -286,7 +310,20 @@ onUnmounted(() => {
 
       <section v-if="project?.detailTextureMedia && !isSiete" class="project-detail-texture">
         <div class="project-detail-texture-media">
+          <video
+            v-if="isVideoFile(project.detailTextureMedia)"
+            class="project-detail-texture-image"
+            :aria-label="`Textura del proyecto ${project.title}`"
+            muted
+            loop
+            autoplay
+            playsinline
+          >
+            <source :src="project.detailTextureMedia" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
           <img
+            v-else
             :src="project.detailTextureMedia"
             :alt="`Textura del proyecto ${project.title}`"
             class="project-detail-texture-image"
@@ -304,8 +341,19 @@ onUnmounted(() => {
       >
         <template v-if="project.detailSecondaryMediaFirst">
           <div class="project-detail-extra-media project-detail-extra-media--first">
+            <video
+              v-if="project.detailMediaSecondary && isVideoFile(project.detailMediaSecondary)"
+              class="project-detail-extra-image project-detail-extra-image--wide"
+              muted
+              loop
+              autoplay
+              playsinline
+            >
+              <source :src="project.detailMediaSecondary" type="video/mp4">
+              Tu navegador no soporta video embebido.
+            </video>
             <img
-              v-if="project.detailMediaSecondary"
+              v-else-if="project.detailMediaSecondary"
               :src="project.detailMediaSecondary"
               :alt="`Montaje del proyecto ${project.title}`"
               class="project-detail-extra-image project-detail-extra-image--wide"
@@ -320,8 +368,19 @@ onUnmounted(() => {
             {{ project.detailBodySecondary }}
           </p>
           <div class="project-detail-extra-media">
+            <video
+              v-if="project.detailMediaSecondary && isVideoFile(project.detailMediaSecondary)"
+              class="project-detail-extra-image"
+              muted
+              loop
+              autoplay
+              playsinline
+            >
+              <source :src="project.detailMediaSecondary" type="video/mp4">
+              Tu navegador no soporta video embebido.
+            </video>
             <img
-              v-if="project.detailMediaSecondary"
+              v-else-if="project.detailMediaSecondary"
               :src="project.detailMediaSecondary"
               :alt="`Montaje del proyecto ${project.title}`"
               class="project-detail-extra-image"
@@ -335,8 +394,20 @@ onUnmounted(() => {
           {{ project.detailPosterTitle }}
         </h1>
         <div class="project-detail-poster-frame">
+          <video
+            v-if="project?.detailPosterImage && isVideoFile(project.detailPosterImage)"
+            class="project-detail-poster-image"
+            :aria-label="`Propuesta visual del proyecto ${project.title}`"
+            muted
+            loop
+            autoplay
+            playsinline
+          >
+            <source :src="project.detailPosterImage" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
           <img
-            v-if="project?.detailPosterImage"
+            v-else-if="project?.detailPosterImage"
             :src="project.detailPosterImage"
             :alt="`Propuesta visual del proyecto ${project.title}`"
             class="project-detail-poster-image"
@@ -362,7 +433,19 @@ onUnmounted(() => {
             'project-detail-stack-item--sin-titulo': index === 1,
           }"
         >
+          <video
+            v-if="isVideoFile(mediaSrc)"
+            class="project-detail-stack-image"
+            muted
+            loop
+            autoplay
+            playsinline
+          >
+            <source :src="mediaSrc" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
           <img
+            v-else
             :src="mediaSrc"
             :alt="`Detalle ${index + 1} del proyecto ${project.title}`"
             class="project-detail-stack-image"
@@ -375,8 +458,19 @@ onUnmounted(() => {
           {{ project.detailBodyTertiary }}
         </p>
         <div class="project-detail-tertiary-media">
+          <video
+            v-if="project.detailMediaTertiary && isVideoFile(project.detailMediaTertiary)"
+            class="project-detail-tertiary-image"
+            muted
+            loop
+            autoplay
+            playsinline
+          >
+            <source :src="project.detailMediaTertiary" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
           <img
-            v-if="project.detailMediaTertiary"
+            v-else-if="project.detailMediaTertiary"
             :src="project.detailMediaTertiary"
             :alt="`Triptico del proyecto ${project.title}`"
             class="project-detail-tertiary-image"
@@ -401,7 +495,20 @@ onUnmounted(() => {
           <span>Logo</span>
           <span>Main Text</span>
         </div>
+        <video
+          v-if="isVideoFile(project.detailTypographyMedia)"
+          class="project-detail-typography-image"
+          :aria-label="`Tipografia del proyecto ${project.title}`"
+          muted
+          loop
+          autoplay
+          playsinline
+        >
+          <source :src="project.detailTypographyMedia" type="video/mp4">
+          Tu navegador no soporta video embebido.
+        </video>
         <img
+          v-else
           :src="project.detailTypographyMedia"
           :alt="`Tipografia del proyecto ${project.title}`"
           class="project-detail-typography-image"
@@ -409,7 +516,20 @@ onUnmounted(() => {
       </section>
 
       <section v-if="project?.detailFinalMedia && !isSiete" class="project-detail-final-block">
+        <video
+          v-if="isVideoFile(project.detailFinalMedia)"
+          class="project-detail-final-image"
+          :aria-label="`Aplicacion final del proyecto ${project.title}`"
+          muted
+          loop
+          autoplay
+          playsinline
+        >
+          <source :src="project.detailFinalMedia" type="video/mp4">
+          Tu navegador no soporta video embebido.
+        </video>
         <img
+          v-else
           :src="project.detailFinalMedia"
           :alt="`Aplicacion final del proyecto ${project.title}`"
           class="project-detail-final-image"
@@ -419,11 +539,17 @@ onUnmounted(() => {
       <section v-if="isSiete" class="project-detail-siete-extra">
         <h1 class="project-detail-siete-title">siete</h1>
         <div class="project-detail-siete-frame">
-          <img
-            src="/imagenes/projects/siete/diseno-sin-titulo-1.gif"
-            alt="Propuesta 01: Scan and Photography del proyecto Siete"
+          <video
             class="project-detail-siete-image"
+            aria-label="Propuesta 01: Scan and Photography del proyecto Siete"
+            muted
+            loop
+            autoplay
+            playsinline
           >
+            <source src="/imagenes/projects/siete/diseno-sin-titulo-1.mp4" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
         </div>
         <div class="project-detail-siete-caption">
           <p class="project-detail-siete-caption-title">PROPOSAL 01: SCAN AND POTOGRAHY</p>
@@ -449,11 +575,17 @@ onUnmounted(() => {
         </div>
 
         <div class="project-detail-siete-frame project-detail-siete-frame--wide">
-          <img
-            src="/imagenes/projects/siete/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif"
-            alt="Propuesta 03 del proyecto Siete"
+          <video
             class="project-detail-siete-image"
+            aria-label="Propuesta 03 del proyecto Siete"
+            muted
+            loop
+            autoplay
+            playsinline
           >
+            <source src="/imagenes/projects/siete/Dise%C3%B1o%20sin%20t%C3%ADtulo.mp4" type="video/mp4">
+            Tu navegador no soporta video embebido.
+          </video>
         </div>
         <div class="project-detail-siete-caption project-detail-siete-caption--wide">
           <p class="project-detail-siete-caption-title">PROPOSAL 03: GEOMETRY & FLAT INKS</p>

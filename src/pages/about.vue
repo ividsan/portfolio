@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue"
+import { Button } from "@/components/ui/button"
 
 type ArrowDot = {
   x: number
@@ -116,10 +117,12 @@ onBeforeUnmount(() => {
       </div>
     </section>
 
-    <button
+    <Button
       ref="arrowRef"
       type="button"
       class="about-arrow"
+      variant="ghost"
+      size="icon"
       aria-label="Next magazine"
       @click="showNextMagazine"
       @pointermove="handlePointerMove"
@@ -133,7 +136,7 @@ onBeforeUnmount(() => {
           transform: `translate(${dot.x + dot.ox}px, ${dot.y + dot.oy}px)`,
         }"
       />
-    </button>
+    </Button>
   </main>
 </template>
 
