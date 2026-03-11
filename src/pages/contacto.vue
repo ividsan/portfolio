@@ -84,11 +84,6 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
           />
         </div>
 
-        <div class="clip-photo" aria-hidden="true">
-          <img src="/imagenes/clip 1.png" alt="" class="clip-photo__clip clip-photo__clip--default">
-          <img src="/imagenes/clip 2.png" alt="" class="clip-photo__clip clip-photo__clip--hover">
-        </div>
-
         <div class="relative min-h-[138px] px-2 pt-1 pb-2 sm:min-h-[162px] sm:pt-2 sm:pb-4">
           <div class="group pr-0 md:pr-[190px]">
             <p class="font-medium uppercase transition-colors group-hover:text-[#002FA7] group-focus-within:text-[#002FA7]">SERVICES OF INTEREST</p>
@@ -140,37 +135,6 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
 </template>
 
 <style scoped>
-.clip-photo {
-  position: absolute;
-  top: -58px;
-  right: -77px;
-  width: 250px;
-  height: 250px;
-  z-index: 10;
-  pointer-events: auto;
-}
-
-.clip-photo__clip {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  transition: opacity 180ms ease;
-  pointer-events: auto;
-}
-
-.clip-photo__clip--hover {
-  opacity: 0;
-}
-
-.clip-photo:hover .clip-photo__clip--default {
-  opacity: 0;
-}
-
-.clip-photo:hover .clip-photo__clip--hover {
-  opacity: 1;
-}
-
 @media (max-width: 900px) {
   .contact-shell {
     margin-top: 14px !important;
@@ -191,16 +155,6 @@ const hasServiceSelected = () => form.selectedServices.length > 0 || form.other.
     margin-top: 6px;
     width: 100%;
     border-left: 0;
-  }
-
-  .clip-photo {
-    position: absolute;
-    top: -44px;
-    right: -10px;
-    width: clamp(120px, 32vw, 170px);
-    height: clamp(120px, 32vw, 170px);
-    margin: 0;
-    transform: none;
   }
 }
 

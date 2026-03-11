@@ -23,7 +23,10 @@ const dots = reactive<ArrowDot[]>([
 ])
 
 const arrowRef = ref<HTMLElement | null>(null)
-const magazineImages = ["/imagenes/revista-1.jpg", "/imagenes/revista-2.jpg"] as const
+const magazineImages = [
+  new URL("/imagenes/magazine mockup 1.png", import.meta.url).href,
+  new URL("/imagenes/magazine mockup 2.png", import.meta.url).href,
+] as const
 const currentMagazineIndex = ref(0)
 const currentMagazineSrc = computed(() => magazineImages[currentMagazineIndex.value])
 
@@ -148,13 +151,13 @@ onBeforeUnmount(() => {
   width: min(100%, 840px);
   display: flex;
   justify-content: center;
-  transform: translateY(-70px);
+  transform: translateY(-40px);
 }
 
 .about-magazine__viewport {
-  width: clamp(680px, 58vw, 880px);
+  width: clamp(600px, 50vw, 800px);
   max-width: 100%;
-  aspect-ratio: 1.25 / 1;
+  aspect-ratio: 1.1 / 1;
   overflow: hidden;
 }
 
@@ -168,9 +171,9 @@ onBeforeUnmount(() => {
 .about-arrow {
   position: absolute;
   right: clamp(26px, 4vw, 50px);
-  bottom: clamp(200px, 16vh, 260px);
-  width: 170px;
-  height: 130px;
+  bottom: clamp(235px, 16vh, 295px);
+  width: clamp(120px, 22vw, 170px);
+  height: clamp(90px, 18vw, 130px);
   border: 0;
   background: transparent;
   padding: 0;
@@ -184,11 +187,27 @@ onBeforeUnmount(() => {
 
 .about-arrow__dot {
   position: absolute;
-  width: 19px;
-  height: 19px;
+  width: clamp(12px, 2.6vw, 19px);
+  height: clamp(12px, 2.6vw, 19px);
   border-radius: 9999px;
   background: #0a3cae;
   left: 0;
   top: 0;
+}
+
+@media (max-width: 700px) {
+  .about-page {
+    padding-top: 64px;
+  }
+
+  .about-magazine {
+    width: 100%;
+    transform: translateY(-10px);
+  }
+
+  .about-magazine__viewport {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
 }
 </style>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ScrollToTop from "@/components/ScrollToTop.vue"
 import { ref } from "vue"
 import { projects } from "./data"
 
@@ -8,68 +9,96 @@ const [project1, project2, project3, project4, project5, project6] = projects
 const openEnvelope = () => {
   isOpen.value = true
 }
+
+const closeEnvelope = () => {
+  isOpen.value = false
+}
 </script>
 
 <template>
-  <main class="projects-page">
+  <main class="projects-page" @click="closeEnvelope">
     <section class="projects-hero">
-      <section class="envelope mx-auto" :class="{ 'is-open': isOpen }">
+      <section class="envelope mx-auto" :class="{ 'is-open': isOpen }" @click.stop>
         <div class="envelope__canvas">
         <img
           src="/imagenes/sobre/solapa inferior.png"
           alt=""
           aria-hidden="true"
           class="envelope__piece envelope__piece--inferior"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <img
           src="/imagenes/sobre/base sobre.png"
           alt=""
           aria-hidden="true"
           class="envelope__piece envelope__piece--base"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <div class="envelope__photos">
           <RouterLink
             :to="{ name: 'project-detail', params: { slug: project1.slug } }"
             class="envelope__photo envelope__photo--1 envelope__photo-link"
             :aria-label="`Open ${project1.code} ${project1.title}`"
-          />
+          >
+            <img :src="project1.image" alt="" aria-hidden="true" class="envelope__photo-image">
+          </RouterLink>
           <RouterLink
             :to="{ name: 'project-detail', params: { slug: project2.slug } }"
             class="envelope__photo envelope__photo--2 envelope__photo-link"
             :aria-label="`Open ${project2.code} ${project2.title}`"
-          />
+          >
+            <img :src="project2.image" alt="" aria-hidden="true" class="envelope__photo-image">
+          </RouterLink>
           <RouterLink
             :to="{ name: 'project-detail', params: { slug: project3.slug } }"
             class="envelope__photo envelope__photo--3 envelope__photo-link"
             :aria-label="`Open ${project3.code} ${project3.title}`"
-          />
+          >
+            <img :src="project3.image" alt="" aria-hidden="true" class="envelope__photo-image">
+          </RouterLink>
           <RouterLink
             :to="{ name: 'project-detail', params: { slug: project4.slug } }"
             class="envelope__photo envelope__photo--4 envelope__photo-link"
             :aria-label="`Open ${project4.code} ${project4.title}`"
-          />
+          >
+            <img :src="project4.image" alt="" aria-hidden="true" class="envelope__photo-image">
+          </RouterLink>
           <RouterLink
             :to="{ name: 'project-detail', params: { slug: project5.slug } }"
             class="envelope__photo envelope__photo--5 envelope__photo-link"
             :aria-label="`Open ${project5.code} ${project5.title}`"
-          />
+          >
+            <img :src="project5.image" alt="" aria-hidden="true" class="envelope__photo-image">
+          </RouterLink>
           <RouterLink
             :to="{ name: 'project-detail', params: { slug: project6.slug } }"
             class="envelope__photo envelope__photo--6 envelope__photo-link"
             :aria-label="`Open ${project6.code} ${project6.title}`"
-          />
+          >
+            <img :src="project6.image" alt="" aria-hidden="true" class="envelope__photo-image">
+          </RouterLink>
         </div>
         <img
           src="/imagenes/sobre/solapa izquierda.png"
           alt=""
           aria-hidden="true"
           class="envelope__piece envelope__piece--izquierda"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <img
           src="/imagenes/sobre/solapa derecha.png"
           alt=""
           aria-hidden="true"
           class="envelope__piece envelope__piece--derecha"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <div class="envelope__hinge-cover" aria-hidden="true" />
         <img
@@ -77,6 +106,9 @@ const openEnvelope = () => {
           alt=""
           aria-hidden="true"
           class="envelope__piece envelope__piece--superior"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <button v-if="!isOpen" type="button" class="envelope__open-button" @click="openEnvelope"><span>TAP TO<br>OPEN</span></button>
         </div>
@@ -157,6 +189,8 @@ const openEnvelope = () => {
         </article>
       </div>
     </section>
+
+    <ScrollToTop />
   </main>
 </template>
 
@@ -339,11 +373,19 @@ const openEnvelope = () => {
   width: 21%;
   aspect-ratio: 0.74 / 1;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  background: transparent;
   transition:
     left 820ms cubic-bezier(0.22, 1, 0.36, 1),
     top 820ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: left, top, transform;
+}
+
+.envelope__photo-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .envelope__photo-link {
@@ -535,5 +577,22 @@ const openEnvelope = () => {
 .envelope__open-button:hover {
   background: #fff;
   color: #003ab6;
+}
+
+@media (max-width: 360px) {
+  .envelope {
+    width: 96vw;
+    transform: translateY(-6%);
+  }
+
+  .envelope__photo {
+    width: calc(24.5% + 8px);
+  }
+
+  .envelope__open-button {
+    width: 88px;
+    height: 88px;
+    font-size: 17px;
+  }
 }
 </style>

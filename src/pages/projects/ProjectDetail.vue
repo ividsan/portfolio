@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue"
+import { ArrowLeft, X } from "lucide-vue-next"
+import ScrollToTop from "@/components/ScrollToTop.vue"
 import { getProjectBySlug } from "./data"
 
 const props = defineProps<{
@@ -10,6 +12,7 @@ const project = computed(() => getProjectBySlug(props.slug))
 const isSiete = computed(() => project.value?.slug === "siete")
 const isRevista = computed(() => project.value?.slug === "revista-01")
 const isComic = computed(() => project.value?.slug === "comic")
+const isLirios = computed(() => project.value?.slug === "lirios")
 
 const revistaSlides = computed(() =>
   isRevista.value
@@ -22,31 +25,116 @@ const revistaSlides = computed(() =>
     : [],
 )
 
+const liriosSlides = computed(() =>
+  isLirios.value
+    ? [
+        "/imagenes/projects/lirios/c1.jpg",
+        "/imagenes/projects/lirios/c2.jpg",
+      ]
+    : [],
+)
+
 const currentSlide = ref(0)
 const currentSlideSrc = computed(() => revistaSlides.value[currentSlide.value])
 
+const liriosSlide = ref(0)
+const liriosSlideSrc = computed(() => liriosSlides.value[liriosSlide.value])
+
+const lightboxOpen = ref(false)
+const lightboxSrc = ref("")
+const lightboxAlt = ref("")
+
 let autoplayTimer: ReturnType<typeof setInterval> | undefined
+let liriosTimer: ReturnType<typeof setInterval> | undefined
 
 const nextSlide = () => {
   if (!revistaSlides.value.length) return
   currentSlide.value = (currentSlide.value + 1) % revistaSlides.value.length
 }
 
+const nextLiriosSlide = () => {
+  if (!liriosSlides.value.length) return
+  liriosSlide.value = (liriosSlide.value + 1) % liriosSlides.value.length
+}
+
+const openLightbox = (src?: string, alt?: string) => {
+  if (!src) return
+  lightboxSrc.value = src
+  lightboxAlt.value = alt ?? ""
+  lightboxOpen.value = true
+  document.body.style.overflow = "hidden"
+}
+
+const closeLightbox = () => {
+  lightboxOpen.value = false
+  lightboxSrc.value = ""
+  lightboxAlt.value = ""
+  document.body.style.overflow = ""
+}
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === "Escape" && lightboxOpen.value) {
+    closeLightbox()
+  }
+}
+
+const handleImageClick = (event: MouseEvent) => {
+  const target = event.target
+  if (!(target instanceof HTMLImageElement)) return
+  if (target.closest(".project-detail-lightbox")) return
+  const src = target.currentSrc || target.src
+  openLightbox(src, target.alt)
+}
+
 onMounted(() => {
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" })
   if (revistaSlides.value.length) {
     autoplayTimer = setInterval(nextSlide, 2000)
   }
+  if (liriosSlides.value.length) {
+    liriosTimer = setInterval(nextLiriosSlide, 2000)
+  }
+  window.addEventListener("keydown", handleKeydown)
 })
 
 onUnmounted(() => {
   if (autoplayTimer) clearInterval(autoplayTimer)
+  if (liriosTimer) clearInterval(liriosTimer)
+  window.removeEventListener("keydown", handleKeydown)
+  document.body.style.overflow = ""
 })
 </script>
 
 <template>
-  <main class="project-detail-page px-4 py-6 md:px-9 md:py-8">
-    <section v-if="isComic && project" class="comic-detail">
+  <main class="project-detail-page px-4 py-6 md:px-9 md:py-8" @click="handleImageClick">
+    <RouterLink to="/projects" class="project-detail-back" aria-label="Volver a proyectos">
+      <ArrowLeft class="project-detail-back__icon" aria-hidden="true" />
+    </RouterLink>
 
+    <div
+      v-if="lightboxOpen"
+      class="project-detail-lightbox"
+      role="dialog"
+      aria-modal="true"
+      @click.stop="closeLightbox"
+    >
+      <button
+        type="button"
+        class="project-detail-lightbox__close"
+        aria-label="Cerrar imagen"
+        @click.stop="closeLightbox"
+      >
+        <X class="project-detail-lightbox__close-icon" aria-hidden="true" />
+      </button>
+      <img
+        :src="lightboxSrc"
+        :alt="lightboxAlt"
+        class="project-detail-lightbox__image"
+        @click.stop
+      >
+    </div>
+
+    <section v-if="isComic && project" class="comic-detail">
       <div class="comic-hero-frame">
         <img
           :src="project.detailHeroMedia || project.image"
@@ -101,6 +189,50 @@ onUnmounted(() => {
       </section>
     </section>
 
+    <section v-else-if="isLirios && project" class="lirios-detail">
+      <div class="lirios-gallery">
+        <img
+          v-for="(mediaSrc, index) in project.detailMediaStack"
+          :key="`lirios-image-${index}`"
+          :src="mediaSrc"
+          :alt="`Variacion ${index + 1} del proyecto ${project.title}`"
+          class="lirios-image"
+        >
+      </div>
+
+      <section class="lirios-info">
+        <div class="lirios-heading">
+          <h2>{{ project.detailHeading }}</h2>
+          <p>{{ project.detailSubheading }}</p>
+        </div>
+      </section>
+
+      <section class="lirios-process">
+        <p class="lirios-lede">
+          {{ project.detailBody }}
+        </p>
+        <div class="lirios-process-grid">
+          <div class="lirios-process-media">
+            <div class="lirios-carousel" aria-label="GalerÃ­a Lirios">
+              <img
+                :src="liriosSlideSrc"
+                :alt="`Cianotipia ${liriosSlide + 1} del proyecto ${project.title}`"
+                class="lirios-process-image"
+              >
+            </div>
+          </div>
+          <div class="lirios-process-text">
+            <p
+              v-for="(paragraph, index) in project.detailBodySecondary?.split('\n\n')"
+              :key="`lirios-process-${index}`"
+            >
+              {{ paragraph }}
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+
     <section v-else class="project-detail-shell">
       <div class="project-detail-media">
         <img
@@ -131,11 +263,11 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <section v-if="isRevista" class="project-detail-carousel" aria-label="Galería Revista Artículo 1">
+        <section v-if="isRevista" class="project-detail-carousel" aria-label="GalerÃ­a Revista ArtÃ­culo 1">
           <div class="about-magazine__viewport">
             <img
               :src="currentSlideSrc"
-              :alt="`Página ${currentSlide + 1} revista`"
+              :alt="`PÃ¡gina ${currentSlide + 1} revista`"
               class="about-magazine__image"
             >
           </div>
@@ -327,6 +459,8 @@ onUnmounted(() => {
         </div>
       </section>
     </section>
+
+    <ScrollToTop />
   </main>
 </template>
 
@@ -336,6 +470,82 @@ onUnmounted(() => {
   background: #fff;
 }
 
+.project-detail-page img {
+  cursor: zoom-in;
+}
+
+.project-detail-back {
+  position: fixed;
+  top: 38px;
+  left: 18px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: transparent;
+  color: #0a3cae;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.project-detail-back:hover {
+  color: #003ab6;
+}
+
+.project-detail-back:focus-visible {
+  outline: 2px solid #0a3cae;
+  outline-offset: 4px;
+}
+
+.project-detail-back__icon {
+  width: 22px;
+  height: 22px;
+}
+
+.project-detail-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 24px;
+}
+
+.project-detail-lightbox__image {
+  max-width: min(92vw, 1400px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  cursor: zoom-out;
+}
+
+.project-detail-lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.project-detail-lightbox__close:hover {
+  color: #bcd0ff;
+}
+
+.project-detail-lightbox__close-icon {
+  width: 22px;
+  height: 22px;
+}
+
 .comic-detail {
   width: 100%;
   max-width: 1200px;
@@ -343,7 +553,6 @@ onUnmounted(() => {
   --comic-frame-pad: clamp(12px, 2vw, 20px);
   --comic-image-max: 1180px;
 }
-
 
 .comic-hero-frame {
   background: #0a0a0a;
@@ -439,8 +648,119 @@ onUnmounted(() => {
   max-width: var(--comic-image-max);
 }
 
+.lirios-detail {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(6px, 2vw, 20px);
+}
+
+.lirios-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.5vw, 24px);
+  justify-items: center;
+}
+
+.lirios-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  background: #f1f1f1;
+}
+
+.lirios-info {
+  margin-top: clamp(24px, 5vw, 48px);
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 2fr;
+  gap: clamp(18px, 4vw, 46px);
+  align-items: start;
+}
+
+.lirios-heading h2 {
+  margin: 0 0 8px;
+  font-size: 14pt;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.lirios-heading p {
+  margin: 0;
+  font-size: 12pt;
+  line-height: 1.25;
+}
+
+.lirios-process {
+  margin-top: clamp(24px, 5vw, 52px);
+  display: grid;
+  gap: clamp(18px, 4vw, 32px);
+  padding-bottom: 100px;
+}
+
+.lirios-lede {
+  margin: 0;
+  font-size: 12pt;
+  line-height: 1.35;
+  max-width: 980px;
+}
+
+.lirios-process-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) 1.4fr;
+  gap: clamp(18px, 4vw, 40px);
+  align-items: start;
+  margin-top: 30px;
+}
+
+.lirios-process-media {
+  padding: 0;
+}
+
+.lirios-carousel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: clamp(320px, 70vw, 520px);
+  margin-top: 0;
+}
+
+.lirios-process-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  max-width: 520px;
+}
+
+.lirios-process-text p {
+  margin: 0 0 12px;
+  font-size: 12pt;
+  line-height: 1.35;
+}
+
+.lirios-process-text {
+  align-self: center;
+}
+
+.lirios-process-text p:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 900px) {
   .comic-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .lirios-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .lirios-info {
+    grid-template-columns: 1fr;
+  }
+
+  .lirios-process-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -900,5 +1220,44 @@ onUnmounted(() => {
 
 .project-detail-siete-frame--wide {
   margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .project-detail-texture-image {
+    width: 100%;
+    transform: none;
+  }
+
+  .project-detail-texture-body {
+    transform: none;
+  }
+
+  .project-detail-extra-image--wide {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .project-detail-extra-text--after-media {
+    transform: none;
+  }
+
+  .project-detail-logo-block {
+    transform: none;
+  }
+
+  .project-detail-typography-block {
+    transform: none;
+  }
+
+  .project-detail-typography-image {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .project-detail-final-block {
+    transform: none;
+  }
 }
 </style>

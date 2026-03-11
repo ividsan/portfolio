@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ScrollToTop from "@/components/ScrollToTop.vue"
 import { onBeforeUnmount, onMounted, ref } from "vue"
 
 type Dot = {
@@ -396,6 +397,8 @@ onBeforeUnmount(() => {
         </p>
       </div>
     </section>
+
+    <ScrollToTop />
   </main>
 </template>
 
@@ -497,6 +500,15 @@ onBeforeUnmount(() => {
   .home-scroll-screen {
     --hotspot-size: clamp(20px, 7.6vw, 34px);
     --skill-font-size: clamp(9px, 2.7vw, 13px);
+  }
+
+  .home-hero {
+    padding-top: 24px;
+  }
+
+  .home-scroll-screen__image,
+  .home-scroll-screen__buttons {
+    transform: none;
   }
 }
 

@@ -137,13 +137,26 @@ export const projects: ProjectItem[] = [
     detailHeroMedia: "/imagenes/projects/c%C3%B3mic/mockup-color.jpg",
   },
   {
-    slug: "lqnm-05",
+    slug: "lirios",
     code: "06",
-    title: "LQNM",
-    image: "/imagenes/guapa.png",
-    summary: "Propuesta final de narrativa visual para portfolio.",
+    title: "Lirios",
+    image: "/imagenes/projects/lirios/rosa.png",
+    summary: "Exploracion tipografica y fotografica con cianotipias botanicas.",
     description:
-      "Sintesis de aprendizajes del proyecto en una pieza final: estructura clara, composicion estable y lectura directa del concepto.",
+      "Proyecto que combina artesania tradicional y manipulacion digital a partir de cianotipias botanicas.",
+    detailHeading: "Experimental Typography & Photography",
+    detailSubheading:
+      "36 days of type botanical cyanotypes. A visual bridge between traditional craftsmanship and digital manipulation.",
+    detailBody:
+      "This project was developed as part of the 36 Days of Type challenge, exploring the intersection between traditional techniques and modern digital tools. Starting from manual cyanotypes of botanical elements, the pieces were scanned and digitally transformed to create a high-contrast visual language. The project reinterprets the life cycle of flowers through a vibrant color palette: green for growth, pink for blooming, and yellow for the wilting process, merging the organic nature of plants with a contemporary technological aesthetic.",
+    detailBodySecondary:
+      "I developed the entire traditional process, creating the physical cyanotypes using sunlight and botanical specimens. This stage was essential to capture the unique, imperfect textures that only analogue chemistry can provide.\n\nThe raw cyanotypes (blue tones) were post-processed in Photoshop to \"flip\" the concept. By pushing the colors to extremes, the botanical shapes evolve into a bold, floral-inspired typography that feels both organic and artificial.",
+    detailMediaSecondary: "/imagenes/projects/lirios/c2.jpg",
+    detailMediaStack: [
+      "/imagenes/projects/lirios/rosa.png",
+      "/imagenes/projects/lirios/amarillo.png",
+      "/imagenes/projects/lirios/verde.png",
+    ],
   },
   {
     slug: "lqnm-06",
