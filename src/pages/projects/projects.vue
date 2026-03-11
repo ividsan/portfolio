@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ScrollToTop from "@/components/ScrollToTop.vue"
 import { ref } from "vue"
 import { projects } from "./data"
 
@@ -20,156 +19,153 @@ const closeEnvelope = () => {
     <section class="projects-hero">
       <section class="envelope mx-auto" :class="{ 'is-open': isOpen }" @click.stop>
         <div class="envelope__canvas">
-        <img
-          src="/imagenes/sobre/solapa inferior.png"
-          alt=""
-          aria-hidden="true"
-          class="envelope__piece envelope__piece--inferior"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <img
-          src="/imagenes/sobre/base sobre.png"
-          alt=""
-          aria-hidden="true"
-          class="envelope__piece envelope__piece--base"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <div class="envelope__photos">
-          <RouterLink
-            :to="{ name: 'project-detail', params: { slug: project1.slug } }"
-            class="envelope__photo envelope__photo--1 envelope__photo-link"
-            :aria-label="`Open ${project1.code} ${project1.title}`"
-          >
-            <img :src="project1.image" alt="" aria-hidden="true" class="envelope__photo-image">
-          </RouterLink>
-          <RouterLink
-            :to="{ name: 'project-detail', params: { slug: project2.slug } }"
-            class="envelope__photo envelope__photo--2 envelope__photo-link"
-            :aria-label="`Open ${project2.code} ${project2.title}`"
-          >
-            <img :src="project2.image" alt="" aria-hidden="true" class="envelope__photo-image">
-          </RouterLink>
-          <RouterLink
-            :to="{ name: 'project-detail', params: { slug: project3.slug } }"
-            class="envelope__photo envelope__photo--3 envelope__photo-link"
-            :aria-label="`Open ${project3.code} ${project3.title}`"
-          >
-            <img :src="project3.image" alt="" aria-hidden="true" class="envelope__photo-image">
-          </RouterLink>
-          <RouterLink
-            :to="{ name: 'project-detail', params: { slug: project4.slug } }"
-            class="envelope__photo envelope__photo--4 envelope__photo-link"
-            :aria-label="`Open ${project4.code} ${project4.title}`"
-          >
-            <img :src="project4.image" alt="" aria-hidden="true" class="envelope__photo-image">
-          </RouterLink>
-          <RouterLink
-            :to="{ name: 'project-detail', params: { slug: project5.slug } }"
-            class="envelope__photo envelope__photo--5 envelope__photo-link"
-            :aria-label="`Open ${project5.code} ${project5.title}`"
-          >
-            <img :src="project5.image" alt="" aria-hidden="true" class="envelope__photo-image">
-          </RouterLink>
-          <RouterLink
-            :to="{ name: 'project-detail', params: { slug: project6.slug } }"
-            class="envelope__photo envelope__photo--6 envelope__photo-link"
-            :aria-label="`Open ${project6.code} ${project6.title}`"
-          >
-            <img :src="project6.image" alt="" aria-hidden="true" class="envelope__photo-image">
-          </RouterLink>
-        </div>
-        <img
-          src="/imagenes/sobre/solapa izquierda.png"
-          alt=""
-          aria-hidden="true"
-          class="envelope__piece envelope__piece--izquierda"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <img
-          src="/imagenes/sobre/solapa derecha.png"
-          alt=""
-          aria-hidden="true"
-          class="envelope__piece envelope__piece--derecha"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <div class="envelope__hinge-cover" aria-hidden="true" />
-        <img
-          src="/imagenes/sobre/solapa superior.png"
-          alt=""
-          aria-hidden="true"
-          class="envelope__piece envelope__piece--superior"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <button v-if="!isOpen" type="button" class="envelope__open-button" @click="openEnvelope"><span>TAP TO<br>OPEN</span></button>
+          <img
+            src="/imagenes/sobre/solapa inferior.png"
+            alt=""
+            aria-hidden="true"
+            class="envelope__piece envelope__piece--inferior"
+          />
+          <img
+            src="/imagenes/sobre/base sobre.png"
+            alt=""
+            aria-hidden="true"
+            class="envelope__piece envelope__piece--base"
+          />
+          <div class="envelope__photos">
+            <RouterLink
+              :to="{ name: 'project-detail', params: { slug: project1.slug } }"
+              class="envelope__photo envelope__photo--1 envelope__photo-link"
+              :aria-label="`Open ${project1.code} ${project1.title}`"
+            >
+              <img
+                src="/imagenes/projects/LQNM/Presentaci%C3%B3%20LQNMn.png"
+                alt=""
+                aria-hidden="true"
+                class="envelope__photo-image"
+              >
+            </RouterLink>
+            <RouterLink
+              :to="{ name: 'project-detail', params: { slug: project2.slug } }"
+              class="envelope__photo envelope__photo--2 envelope__photo-link"
+              :aria-label="`Open ${project2.code} ${project2.title}`"
+            >
+              <img
+                src="/imagenes/projects/crefad/mockup1.png"
+                alt=""
+                aria-hidden="true"
+                class="envelope__photo-image"
+              >
+            </RouterLink>
+            <RouterLink
+              :to="{ name: 'project-detail', params: { slug: project3.slug } }"
+              class="envelope__photo envelope__photo--3 envelope__photo-link"
+              :aria-label="`Open ${project3.code} ${project3.title}`"
+            >
+              <img
+                src="/imagenes/projects/siete/tot.jpg"
+                alt=""
+                aria-hidden="true"
+                class="envelope__photo-image"
+              >
+            </RouterLink>
+            <RouterLink
+              :to="{ name: 'project-detail', params: { slug: project4.slug } }"
+              class="envelope__photo envelope__photo--4 envelope__photo-link"
+              :aria-label="`Open ${project4.code} ${project4.title}`"
+            >
+              <img
+                :src="project4.image"
+                alt=""
+                aria-hidden="true"
+                class="envelope__photo-image"
+              >
+            </RouterLink>
+            <RouterLink
+              :to="{ name: 'project-detail', params: { slug: project5.slug } }"
+              class="envelope__photo envelope__photo--5 envelope__photo-link"
+              :aria-label="`Open ${project5.code} ${project5.title}`"
+            >
+              <img
+                :src="project5.image"
+                alt=""
+                aria-hidden="true"
+                class="envelope__photo-image"
+              >
+            </RouterLink>
+            <RouterLink
+              :to="{ name: 'project-detail', params: { slug: project6.slug } }"
+              class="envelope__photo envelope__photo--6 envelope__photo-link"
+              :aria-label="`Open ${project6.code} ${project6.title}`"
+            >
+              <img
+                :src="project6.image"
+                alt=""
+                aria-hidden="true"
+                class="envelope__photo-image"
+              >
+            </RouterLink>
+          </div>
+          <img
+            src="/imagenes/sobre/solapa izquierda.png"
+            alt=""
+            aria-hidden="true"
+            class="envelope__piece envelope__piece--izquierda"
+          />
+          <img
+            src="/imagenes/sobre/solapa derecha.png"
+            alt=""
+            aria-hidden="true"
+            class="envelope__piece envelope__piece--derecha"
+          />
+          <div class="envelope__hinge-cover" aria-hidden="true" />
+          <img
+            src="/imagenes/sobre/solapa superior.png"
+            alt=""
+            aria-hidden="true"
+            class="envelope__piece envelope__piece--superior"
+          />
+          <button v-if="!isOpen" type="button" class="envelope__open-button" @click="openEnvelope">
+            <span>TAP TO<br>OPEN</span>
+          </button>
         </div>
       </section>
     </section>
+
     <section class="projects-gallery-screen" aria-label="Projects gallery">
       <div class="projects-gallery-grid">
         <article class="project-tile">
-          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project1.slug } }">
-            <p class="project-tile__title">{{ project1.code }} {{ project1.title }}</p>
-          </RouterLink>
           <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project1.slug } }">
             <div class="project-tile__media">
-              <img :src="project1.image" alt="Proyecto 01" class="project-tile__image">
+              <img src="/imagenes/projects/LQNM/Pres.png" alt="Proyecto 01" class="project-tile__image">
             </div>
           </RouterLink>
         </article>
 
         <article class="project-tile">
-          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project2.slug } }">
-            <p class="project-tile__title">{{ project2.code }} {{ project2.title }}</p>
-          </RouterLink>
           <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project2.slug } }">
             <div class="project-tile__media">
-              <img :src="project2.image" alt="Proyecto 02" class="project-tile__image">
-            </div>
-          </RouterLink>
-        </article>
-      </div>
-    </section>
-    <section class="projects-gallery-screen projects-gallery-screen--offset" aria-label="Projects gallery continuation">
-      <div class="projects-gallery-grid projects-gallery-grid--offset">
-        <article class="project-tile">
-          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project3.slug } }">
-            <p class="project-tile__title">{{ project3.code }} {{ project3.title }}</p>
-          </RouterLink>
-          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project3.slug } }">
-            <div class="project-tile__media">
-              <img :src="project3.image" alt="Proyecto 03" class="project-tile__image">
+              <img src="/imagenes/projects/crefad/mockup1.png" alt="Proyecto 02" class="project-tile__image">
             </div>
           </RouterLink>
         </article>
 
         <article class="project-tile">
-          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project4.slug } }">
-            <p class="project-tile__title">{{ project4.code }} {{ project4.title }}</p>
+          <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project3.slug } }">
+            <div class="project-tile__media">
+              <img src="/imagenes/projects/siete/tot.jpg" alt="Proyecto 03" class="project-tile__image">
+            </div>
           </RouterLink>
+        </article>
+
+        <article class="project-tile">
           <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project4.slug } }">
             <div class="project-tile__media">
               <img :src="project4.image" alt="Proyecto 04" class="project-tile__image">
             </div>
           </RouterLink>
         </article>
-      </div>
-    </section>
-    <section class="projects-gallery-screen" aria-label="Projects gallery third screen">
-      <div class="projects-gallery-grid">
+
         <article class="project-tile">
-          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project5.slug } }">
-            <p class="project-tile__title">{{ project5.code }} {{ project5.title }}</p>
-          </RouterLink>
           <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project5.slug } }">
             <div class="project-tile__media">
               <img :src="project5.image" alt="Proyecto 05" class="project-tile__image">
@@ -178,9 +174,6 @@ const closeEnvelope = () => {
         </article>
 
         <article class="project-tile">
-          <RouterLink class="project-tile__title-link" :to="{ name: 'project-detail', params: { slug: project6.slug } }">
-            <p class="project-tile__title">{{ project6.code }} {{ project6.title }}</p>
-          </RouterLink>
           <RouterLink class="project-tile__media-link" :to="{ name: 'project-detail', params: { slug: project6.slug } }">
             <div class="project-tile__media">
               <img :src="project6.image" alt="Proyecto 06" class="project-tile__image">
@@ -189,8 +182,6 @@ const closeEnvelope = () => {
         </article>
       </div>
     </section>
-
-    <ScrollToTop />
   </main>
 </template>
 
@@ -212,53 +203,23 @@ const closeEnvelope = () => {
   width: 100%;
   min-height: 100vh;
   background: #fff;
-  padding: clamp(190px, 28vh, 260px) 1rem clamp(24px, 5vh, 56px);
+  padding: clamp(140px, 24vh, 220px) clamp(18px, 3vw, 36px) clamp(48px, 10vh, 120px);
   display: flex;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .projects-gallery-grid {
   width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: start;
-  justify-items: start;
-  column-gap: 0;
-  row-gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 28px);
 }
 
 .project-tile {
-  width: min(100%, 260px);
-  justify-self: start;
-}
-
-.project-tile:nth-child(1) {
-  grid-column: 1;
-}
-
-.project-tile:nth-child(2) {
-  grid-column: 3;
-}
-
-.projects-gallery-grid--offset .project-tile:nth-child(1) {
-  grid-column: 2;
-}
-
-.projects-gallery-grid--offset .project-tile:nth-child(2) {
-  grid-column: 4;
-}
-
-.project-tile__title {
-  margin: 0 0 6px;
-  font-size: 15px;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.project-tile__title-link {
-  color: inherit;
-  text-decoration: none;
+  width: 100%;
 }
 
 .project-tile__media-link {
@@ -268,24 +229,47 @@ const closeEnvelope = () => {
 .project-tile__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.75 / 1;
-  background: #0a3cae;
+  aspect-ratio: 1 / 1;
+  background: #f3f3f3;
   overflow: hidden;
+}
+
+.project-tile__media::before {
+  content: "[ MORE ]";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(14px, 1.6vw, 18px);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #111;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  z-index: 2;
 }
 
 .project-tile__media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.75);
   opacity: 0;
   transition: opacity 160ms ease;
   pointer-events: none;
+  z-index: 1;
 }
 
 .project-tile__media-link:hover .project-tile__media::after,
-.project-tile__media-link:focus-visible .project-tile__media::after {
+.project-tile__media-link:focus-visible .project-tile__media::after,
+.project-tile__media-link:hover .project-tile__media::before,
+.project-tile__media-link:focus-visible .project-tile__media::before {
   opacity: 1;
+}
+
+.project-tile__media-link:hover .project-tile__media::before,
+.project-tile__media-link:focus-visible .project-tile__media::before {
+  color: #003ab6;
 }
 
 .project-tile__image {
@@ -308,13 +292,6 @@ const closeEnvelope = () => {
 
   .project-tile {
     width: min(100%, 280px);
-  }
-
-  .project-tile:nth-child(1),
-  .project-tile:nth-child(2),
-  .projects-gallery-grid--offset .project-tile:nth-child(1),
-  .projects-gallery-grid--offset .project-tile:nth-child(2) {
-    grid-column: auto;
   }
 }
 
@@ -370,7 +347,7 @@ const closeEnvelope = () => {
 
 .envelope__photo {
   position: absolute;
-  width: 21%;
+  width: calc(23.5% + 10px);
   aspect-ratio: 0.74 / 1;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
   background: transparent;
@@ -417,42 +394,36 @@ const closeEnvelope = () => {
   left: 30%;
   top: 29%;
   transform: rotate(-3deg);
-  background: #113ab7;
 }
 
 .envelope__photo--2 {
   left: 18%;
   top: 35.5%;
   transform: rotate(-12deg);
-  background: #17937d;
 }
 
 .envelope__photo--3 {
   left: 32%;
   top: 37.5%;
   transform: rotate(-6deg);
-  background: #9584ce;
 }
 
 .envelope__photo--4 {
   left: 42%;
   top: 28%;
   transform: rotate(3deg);
-  background: #9d1063;
 }
 
 .envelope__photo--5 {
   left: 46%;
   top: 37%;
   transform: rotate(7deg);
-  background: #06b962;
 }
 
 .envelope__photo--6 {
   left: 57%;
   top: 30%;
   transform: rotate(8deg);
-  background: #5a31ab;
 }
 
 .envelope.is-open .envelope__photos {
@@ -577,22 +548,5 @@ const closeEnvelope = () => {
 .envelope__open-button:hover {
   background: #fff;
   color: #003ab6;
-}
-
-@media (max-width: 360px) {
-  .envelope {
-    width: 96vw;
-    transform: translateY(-6%);
-  }
-
-  .envelope__photo {
-    width: calc(24.5% + 8px);
-  }
-
-  .envelope__open-button {
-    width: 88px;
-    height: 88px;
-    font-size: 17px;
-  }
 }
 </style>
