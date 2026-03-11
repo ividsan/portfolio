@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ArrowUp } from "lucide-vue-next"
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
@@ -9,7 +8,6 @@ const scrollToTop = () => {
 <template>
   <div class="scroll-top">
     <button type="button" class="scroll-top__button" @click="scrollToTop" aria-label="Scroll to top">
-      <ArrowUp class="scroll-top__icon" aria-hidden="true" />
       <span class="scroll-top__label">[ SCROLL TO TOP ]</span>
     </button>
   </div>
@@ -44,8 +42,4 @@ const scrollToTop = () => {
   outline-offset: 4px;
 }
 
-.scroll-top__icon {
-  width: 18px;
-  height: 18px;
-}
 </style>

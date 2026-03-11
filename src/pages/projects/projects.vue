@@ -310,9 +310,9 @@ const closeEnvelope = () => {
 
 .envelope {
   position: relative;
-  width: min(90vw, 780px);
+  width: min(92vw, 840px);
   aspect-ratio: 1167 / 822;
-  transform: translateY(-13%);
+  transform: translateY(calc(-13% - 50px));
   perspective: 1200px;
 }
 
@@ -347,8 +347,8 @@ const closeEnvelope = () => {
 
 .envelope__photo {
   position: absolute;
-  width: calc(23.5% + 10px);
-  aspect-ratio: 0.74 / 1;
+  width: calc(28% + 16px);
+  aspect-ratio: 1 / 1;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
   background: transparent;
   transition:
@@ -421,7 +421,7 @@ const closeEnvelope = () => {
 }
 
 .envelope__photo--6 {
-  left: 57%;
+  left: calc(57% - 30px);
   top: 30%;
   transform: rotate(8deg);
 }
@@ -461,7 +461,7 @@ const closeEnvelope = () => {
 }
 
 .envelope.is-open .envelope__photo--6 {
-  left: 104%;
+  left: calc(104% - 30px);
   top: -4%;
   transform: rotate(8deg);
 }

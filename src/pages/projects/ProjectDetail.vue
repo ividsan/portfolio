@@ -13,14 +13,15 @@ const isSiete = computed(() => project.value?.slug === "siete")
 const isRevista = computed(() => project.value?.slug === "revista-01")
 const isComic = computed(() => project.value?.slug === "comic")
 const isLirios = computed(() => project.value?.slug === "lirios")
+const isCrefad = computed(() => project.value?.slug === "lqnm-02")
 
 const revistaSlides = computed(() =>
   isRevista.value
     ? [
-        "/imagenes/projects/revista/1.jpg",
-        "/imagenes/projects/revista/2.jpg",
-        "/imagenes/projects/revista/3.jpg",
-        "/imagenes/projects/revista/4.jpg",
+        "/imagenes/projects/articulo/1.jpg",
+        "/imagenes/projects/articulo/2.jpg",
+        "/imagenes/projects/articulo/3.jpg",
+        "/imagenes/projects/articulo/4.jpg",
       ]
     : [],
 )
@@ -383,7 +384,11 @@ onUnmounted(() => {
         </div>
       </section>
 
-      <section v-if="project?.detailLogo && !isSiete" class="project-detail-logo-block">
+      <section
+        v-if="project?.detailLogo && !isSiete"
+        class="project-detail-logo-block"
+        :class="{ 'project-detail-logo-block--crefad': isCrefad }"
+      >
         <img
           :src="project.detailLogo"
           :alt="`Logo del proyecto ${project.title}`"
@@ -476,14 +481,14 @@ onUnmounted(() => {
 
 .project-detail-back {
   position: fixed;
-  top: 38px;
-  left: 18px;
+  top: 53px;
+  left: 25px;
   z-index: 20;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 9999px;
   background: transparent;
   color: #0a3cae;
@@ -500,8 +505,8 @@ onUnmounted(() => {
 }
 
 .project-detail-back__icon {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
 }
 
 .project-detail-lightbox {
@@ -770,7 +775,7 @@ onUnmounted(() => {
   position: relative;
   margin: 0 auto;
   width: 100%;
-  max-width: 1080px;
+  max-width: 1200px;
   padding: 0;
 }
 
@@ -802,7 +807,7 @@ onUnmounted(() => {
   z-index: 2;
   margin: var(--detail-gap) auto 0;
   width: 100%;
-  max-width: 1080px;
+  max-width: 1200px;
 }
 
 .project-detail-columns {
@@ -829,6 +834,10 @@ onUnmounted(() => {
 
 .project-detail-carousel {
   margin-top: calc(clamp(28px, 4vw, 44px) + 60px);
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about-magazine__viewport {
@@ -845,6 +854,7 @@ onUnmounted(() => {
   height: auto;
   display: block;
   object-fit: cover;
+  margin-left: 0;
 }
 
 .project-detail-secondary-media {
@@ -1065,7 +1075,11 @@ onUnmounted(() => {
   max-width: 1080px;
   position: relative;
   z-index: 0;
-  transform: translateY(-300px);
+  transform: translateY(-100px);
+}
+
+.project-detail-logo-block--crefad {
+  transform: translateY(-150px);
 }
 
 .project-detail-logo-image {

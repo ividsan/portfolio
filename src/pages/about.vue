@@ -24,8 +24,8 @@ const dots = reactive<ArrowDot[]>([
 
 const arrowRef = ref<HTMLElement | null>(null)
 const magazineImages = [
-  new URL("/imagenes/magazine mockup 1.png", import.meta.url).href,
-  new URL("/imagenes/magazine mockup 2.png", import.meta.url).href,
+  "/imagenes/magazine-mockup1.jpg",
+  "/imagenes/magazine-mockup-2.jpg",
 ] as const
 const currentMagazineIndex = ref(0)
 const currentMagazineSrc = computed(() => magazineImages[currentMagazineIndex.value])
